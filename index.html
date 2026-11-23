@@ -10,9 +10,9 @@
   <header class="nav">
     <div class="nav__inner">
       <nav class="nav__links" aria-label="Primary">
-        <a class="nav__item nav__item--tab nav__item--active" href="#home" aria-current="page">Home<img class="nav__underline" src="assets/line2.svg" alt=""></a>
-        <a class="nav__item nav__item--tab" href="#work">Work<img class="nav__underline" src="assets/line2.svg" alt=""></a>
-        <a class="nav__item nav__item--tab" href="#about">About<img class="nav__underline" src="assets/line2.svg" alt=""></a>
+        <a class="nav__item nav__item--tab nav__item--active" href="index.html" aria-current="page">Home<img class="nav__underline" src="assets/line2.svg" alt=""></a>
+        <a class="nav__item nav__item--tab" href="work.html">Work<img class="nav__underline" src="assets/line2.svg" alt=""></a>
+        <a class="nav__item nav__item--tab" href="about.html">About<img class="nav__underline" src="assets/line2.svg" alt=""></a>
         <a class="nav__item nav__item--more" href="#resume">Resume <img src="assets/arrow.svg" width="14" height="14" alt=""></a>
         <button class="nav__theme" type="button" aria-label="Toggle theme"><img src="assets/theme-sun.svg" width="18" height="18" alt=""></button>
       </nav>
@@ -128,26 +128,6 @@
       });
     })();
 
-    // Active nav tab follows the section in view (and updates on click via the scroll it triggers)
-    const tabs = [...document.querySelectorAll('.nav__item--tab')];
-    const navH = document.querySelector('.nav').offsetHeight;
-    function updateActive() {
-      const atBottom = innerHeight + scrollY >= document.documentElement.scrollHeight - 2;
-      let current = tabs[0];
-      tabs.forEach(t => {
-        const sec = document.querySelector(t.getAttribute('href'));
-        if (sec.getBoundingClientRect().top <= navH + 40) current = t;
-      });
-      if (atBottom) current = tabs[tabs.length - 1];
-      tabs.forEach(t => {
-        const on = t === current;
-        t.classList.toggle('nav__item--active', on);
-        on ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current');
-      });
-    }
-    addEventListener('scroll', updateActive, { passive: true });
-    addEventListener('resize', updateActive);
-    updateActive();
 
     const tpl = document.getElementById('card');
     document.querySelectorAll('.projects__grid').forEach(grid => {
