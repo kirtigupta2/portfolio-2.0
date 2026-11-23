@@ -83,14 +83,16 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .projects__header { padding: 0 28px 0 20px; }
 .projects__header h2 { font-size: 28px; }
 .projects__grid { border-top: 1px dashed var(--border); padding: 0 0 24px; display: grid; grid-template-columns: 1fr 1fr; }
-.projects__grid--single { grid-template-columns: 1fr; padding-top: 12px; }  /* About grid keeps its 12px top padding in Figma */
+/* About: just the notebook image in a bordered card (no divider above, no text) */
+.about-board { display: flex; }
+.about-board__card { flex: 1; min-width: 0; display: flex; justify-content: center; padding: 16px; border-right: 1px dashed var(--border); border-bottom: 1px dashed var(--border); }
+.about-board__card img { width: 1091px; max-width: 100%; height: 771.6px; object-fit: cover; display: block; }
 
 .card {
   display: flex; flex-direction: column; gap: 12px; padding: 16px; min-width: 0;
   border-right: 1px dashed var(--border); border-bottom: 1px dashed var(--border);
 }
 .card__image { width: 517px; max-width: 100%; height: 417px; object-fit: cover; align-self: center; }
-.projects__grid--single .card__image { width: 1065px; height: 671px; }
 .card__title-row { display: flex; justify-content: space-between; align-items: flex-start; }
 .card__titles { display: flex; flex-direction: column; gap: 2px; }
 .card__name { font-size: 20px; font-weight: 700; color: #f5f5f5; }
@@ -110,7 +112,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 
 /* Figma spacing: gap above "About my process" and trailing space below it */
 #about { margin-top: 62px; }
-.column { padding-bottom: 208px; }
+.column { padding-bottom: 270px; }
 
 /* ---- Highlighter marker ---- */
 .hand--right { isolation: isolate; }

@@ -27,18 +27,20 @@
       <div class="hero__arrow hero__arrow--a"><div class="hero__arrow-inner"><img src="assets/vector.svg" alt=""></div></div>
       <div class="hero__arrow hero__arrow--b"><div class="hero__arrow-inner"><img src="assets/vector1.svg" alt=""></div></div>
       <p class="hand hand--left">prev a summer intern @</p>
-      <p class="hand-group"><span class="hand-text">Accenture Song</span><img src="assets/image42.png" width="17" height="17" alt="Accenture logo"></p>
+      <p class="hand-group"><span class="hand-text">Accenture Song</span><img src="assets/accenture-logo.png" width="17" height="17" alt="Accenture logo"></p>
       <p class="hand hand--right">I connect what <span class="mark">people need with what a business is striving to achieve, then ideate, sketch and build ideas</span> that bring the two together.</p>
     </section>
 
     <section class="projects" id="work">
       <div class="projects__header"><h2>Selected Projects</h2></div>
-      <div class="projects__grid" data-image="assets/image39.png"></div>
+      <div class="projects__grid" data-images="assets/project-1.png,assets/image39.png"></div>
     </section>
 
     <section class="projects" id="about">
       <div class="projects__header"><h2>About my process</h2></div>
-      <div class="projects__grid projects__grid--single" data-image="assets/image41.png" data-count="1"></div>
+      <div class="about-board">
+        <div class="about-board__card"><img src="assets/about-notebook.png" alt="Open notebook showing education, certifications, skills and interests"></div>
+      </div>
     </section>
   </div>
 
@@ -146,11 +148,11 @@
     setActive(tabs.some(t => t.getAttribute('href') === location.hash) ? location.hash : '#home');
 
     const tpl = document.getElementById('card');
-    document.querySelectorAll('.projects__grid').forEach(grid => {
-      const n = Number(grid.dataset.count || 4);
-      for (let i = 0; i < n; i++) {
+    document.querySelectorAll('.projects__grid[data-images]').forEach(grid => {
+      const imgs = grid.dataset.images.split(',');
+      for (let i = 0; i < 4; i++) {
         const el = tpl.content.cloneNode(true);
-        el.querySelector('.card__image').src = grid.dataset.image;
+        el.querySelector('.card__image').src = imgs[Math.min(i, imgs.length - 1)];
         grid.appendChild(el);
       }
     });
