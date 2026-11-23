@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Kalam Hand';   /* Kalam Light (OFL) stands in for Figma Hand, which isn't distributable */
+  src: url('assets/fonts/kalam-latin-300-normal.woff2') format('woff2');
+  font-weight: 300; font-display: swap;
+}
 :root {
   --col: 1204px;
   --border: #2c2c2c;
@@ -68,13 +73,13 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .hero__arrow--b .hero__arrow-inner { width: 68.6px; height: 40px; transform: translate(-50%, -50%) rotate(-120.38deg) skewX(-4.75deg); }
 .hero__arrow--b img { left: -0.73%; top: -1.84%; width: 101.46%; height: 103.09%; }
 .hand {
-  position: absolute; font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive;
+  position: absolute; font-family: 'Figma Hand', 'Kalam Hand', 'Segoe Print', cursive;
   font-size: 16px; line-height: 23px; color: #ececec;
 }
 .hand--left { left: 382px; top: 314px; white-space: nowrap; transform: translateX(-100%); text-align: right; }
 /* second line of the note + Accenture logo (Figma: its own group, 8px gap) */
 .hand-group { position: absolute; left: 216px; top: 338px; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
-.hand-group .hand-text { font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 16px; line-height: 23px; color: #ececec; }
+.hand-group .hand-text { font-family: 'Figma Hand', 'Kalam Hand', 'Segoe Print', cursive; font-size: 16px; line-height: 23px; color: #ececec; }
 .hand-group img { width: 17px; height: 17px; flex-shrink: 0; object-fit: cover; }
 .hand--right { left: 675px; top: 411px; width: 429px; font-size: 20px; line-height: 28px; }
 
@@ -82,8 +87,8 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .projects { border-top: 1px dashed var(--border); padding: 16px 0 24px; display: flex; flex-direction: column; gap: 16px; }
 .projects__header { padding: 0 28px 0 20px; }
 .projects__header h2 { font-size: 28px; }
-.projects__grid { border-top: 1px dashed var(--border); padding: 12px 0 24px; display: grid; grid-template-columns: 1fr 1fr; }
-.projects__grid--single { grid-template-columns: 1fr; }
+.projects__grid { border-top: 1px dashed var(--border); padding: 0 0 24px; display: grid; grid-template-columns: 1fr 1fr; }
+.projects__grid--single { grid-template-columns: 1fr; padding-top: 12px; }  /* About grid keeps its 12px top padding in Figma */
 
 .card {
   display: flex; flex-direction: column; gap: 12px; padding: 16px; min-width: 0;
@@ -109,8 +114,8 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 }
 
 /* Figma spacing: gap above "About my process" and trailing space below it */
-#about { margin-top: 78px; }
-.column { padding-bottom: 180px; }
+#about { margin-top: 62px; }
+.column { padding-bottom: 208px; }
 
 /* ---- Highlighter marker ---- */
 .hand--right { isolation: isolate; }
