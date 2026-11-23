@@ -1,4 +1,5 @@
 :root {
+  --col: 1204px;
   --border: #2c2c2c;
   --text: #f2f2f2;
   --muted: #8f8f8f;
@@ -21,7 +22,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 
 .column {
   position: relative;
-  width: 1099px;
+  width: var(--col);
   max-width: 100%;
   border-left: 1px dashed var(--border);
   border-right: 1px dashed var(--border);
@@ -36,7 +37,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
   border-bottom: 1px dashed var(--border);
 }
 .nav__inner {
-  width: 1099px; max-width: 100%; height: 79px; margin: 0 auto;
+  width: var(--col); max-width: 100%; height: 79px; margin: 0 auto;
   display: flex; align-items: center; justify-content: center;
   border-left: 1px dashed var(--border); border-right: 1px dashed var(--border);
 }
@@ -51,19 +52,21 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 
 /* Hero: 571px tall, coordinates from Figma column */
 .hero { position: relative; height: 571px; overflow: hidden; }
-.hero__ellipse { position: absolute; left: 449px; top: 349px; transform: rotate(-29.3deg); }
+.hero__ellipse { position: absolute; left: 464px; top: 349px; transform: rotate(-29.3deg); }
 .hero__title { position: absolute; font-size: 64px; line-height: normal; color: var(--text); white-space: nowrap; }
 .hero__title--a { left: 153px; top: 81px; }
 .hero__title--b { left: 646px; top: 178px; }
-.hero__photo { position: absolute; width: 344px; height: 396px; left: calc(50% - 23.5px - 172px); top: 50px; object-fit: cover; }
+.hero__photo { position: absolute; width: 344px; height: 396px; left: calc(50% - 24px - 172px); top: 50px; object-fit: cover; }
 /* Arrows: outer box from Figma insets; inner box is the rotated vector (Figma's rotation math, precomputed) */
 .hero__arrow { position: absolute; }
 .hero__arrow-inner { position: absolute; left: 50%; top: 50%; }
-.hero__arrow-inner img { position: absolute; left: -0.75%; top: -1.93%; width: 101.5%; height: 103.27%; max-width: none; display: block; }
-.hero__arrow--a { left: 289.6px; top: 301px; width: 75.3px; height: 55.7px; }
-.hero__arrow--a .hero__arrow-inner { width: 67px; height: 37.3px; transform: translate(-50%, -50%) rotate(162.3deg) scaleX(-1); }
-.hero__arrow--b { left: 662.2px; top: 326.2px; width: 67.5px; height: 76px; }
-.hero__arrow--b .hero__arrow-inner { width: 66.5px; height: 37.4px; transform: translate(-50%, -50%) rotate(-122.66deg); }
+.hero__arrow-inner img { position: absolute; max-width: none; display: block; }
+.hero__arrow--a { left: 317.3px; top: 301px; width: 82.1px; height: 55.7px; }
+.hero__arrow--a .hero__arrow-inner { width: 72.5px; height: 37.6px; transform: translate(-50%, -50%) rotate(163.76deg) scaleX(-1) skewX(-3.03deg); }
+.hero__arrow--a img { left: -0.69%; top: -1.85%; width: 101.38%; height: 103.17%; }
+.hero__arrow--b { left: 725.5px; top: 326.2px; width: 73.9px; height: 76px; }
+.hero__arrow--b .hero__arrow-inner { width: 68.4px; height: 39.9px; transform: translate(-50%, -50%) rotate(-125.08deg) skewX(-4.75deg); }
+.hero__arrow--b img { left: -0.73%; top: -1.84%; width: 101.46%; height: 103.09%; }
 .hand {
   position: absolute; font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive;
   font-size: 16px; line-height: 23px; color: #ececec;
@@ -82,8 +85,8 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
   display: flex; flex-direction: column; gap: 12px; padding: 16px; min-width: 0;
   border-right: 1px dashed var(--border); border-bottom: 1px dashed var(--border);
 }
-.card__image { width: 100%; height: 417px; object-fit: cover; }
-.projects__grid--single .card__image { height: 671px; }
+.card__image { width: 517px; max-width: 100%; height: 417px; object-fit: cover; align-self: center; }
+.projects__grid--single .card__image { width: 1065px; height: 671px; }
 .card__title-row { display: flex; justify-content: space-between; align-items: flex-start; }
 .card__titles { display: flex; flex-direction: column; gap: 2px; }
 .card__name { font-size: 20px; font-weight: 700; color: #f5f5f5; }
@@ -100,3 +103,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
   .projects__grid { grid-template-columns: 1fr; }
   .hero { height: 620px; }
 }
+
+/* Figma spacing: gap above "About my process" and trailing space below it */
+#about { margin-top: 78px; }
+.column { padding-bottom: 180px; }
