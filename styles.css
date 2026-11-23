@@ -1,0 +1,93 @@
+:root {
+  --border: #2c2c2c;
+  --text: #f2f2f2;
+  --muted: #8f8f8f;
+  --body: #a3a3a3;
+  --tag-bg: #1c1c1c;
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  background: #000;
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+}
+a { color: inherit; text-decoration: none; }
+h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
+
+.column {
+  position: relative;
+  width: 1099px;
+  max-width: 100%;
+  border-left: 1px dashed var(--border);
+  border-right: 1px dashed var(--border);
+  min-height: 100vh;
+}
+
+/* Nav (full-bleed bar) */
+.nav {
+  height: 80px;
+  display: flex; align-items: center; justify-content: center;
+  border-bottom: 1px dashed var(--border);
+  position: relative;
+}
+.nav::before, .nav::after {
+  content: ""; position: absolute; bottom: -1px; height: 1px; width: 100vw;
+  border-bottom: 1px dashed var(--border);
+}
+.nav::before { right: 100%; }
+.nav::after { left: 100%; }
+.nav__links { display: flex; align-items: center; gap: 26px; }
+.nav__item { font-size: 15px; font-weight: 500; color: #9a9a9a; display: flex; align-items: center; gap: 5px; }
+.nav__item:hover { color: #fff; }
+.nav__item--active { flex-direction: column; gap: 3px; color: #fff; font-weight: 600; }
+.nav__underline { width: 41px; display: block; }
+.nav__theme { background: none; border: 0; padding: 0; cursor: pointer; display: flex; }
+
+/* Hero: 571px tall, coordinates from Figma column */
+.hero { position: relative; height: 571px; overflow: hidden; }
+.hero__ellipse { position: absolute; left: 449px; top: 349px; transform: rotate(-29.3deg); }
+.hero__title { position: absolute; font-size: 64px; line-height: normal; color: var(--text); white-space: nowrap; }
+.hero__title--a { left: 153px; top: 81px; }
+.hero__title--b { left: 646px; top: 178px; }
+.hero__photo { position: absolute; width: 344px; height: 396px; left: calc(50% - 23.5px - 172px); top: 50px; object-fit: cover; }
+.hero__arrow { position: absolute; }
+.hero__arrow--a { left: 290px; top: 301px; width: 75px; height: 56px; }
+.hero__arrow--b { left: 662px; top: 326px; width: 67px; height: 56px; }
+.hand {
+  position: absolute; font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive;
+  font-size: 16px; line-height: 23px; color: #ececec;
+}
+.hand--left { left: 65px; top: 364px; width: 265px; text-align: right; }
+.hand--right { left: 645px; top: 419px; width: 391px; }
+
+/* Projects */
+.projects { border-top: 1px dashed var(--border); padding: 16px 0 24px; display: flex; flex-direction: column; gap: 16px; }
+.projects__header { padding: 0 28px 0 20px; }
+.projects__header h2 { font-size: 28px; }
+.projects__grid { border-top: 1px dashed var(--border); padding: 12px 0 24px; display: grid; grid-template-columns: 1fr 1fr; }
+.projects__grid--single { grid-template-columns: 1fr; }
+
+.card {
+  display: flex; flex-direction: column; gap: 12px; padding: 16px; min-width: 0;
+  border-right: 1px dashed var(--border); border-bottom: 1px dashed var(--border);
+}
+.card__image { width: 100%; height: 417px; object-fit: cover; }
+.projects__grid--single .card__image { height: 671px; }
+.card__title-row { display: flex; justify-content: space-between; align-items: flex-start; }
+.card__titles { display: flex; flex-direction: column; gap: 2px; }
+.card__name { font-size: 20px; font-weight: 700; color: #f5f5f5; }
+.card__tagline { font-size: 13px; font-weight: 500; color: var(--muted); }
+.card__live { display: flex; align-items: center; gap: 6px; padding-top: 8px; font-size: 14px; font-weight: 500; color: var(--muted); }
+.card__desc { font-size: 14.5px; font-weight: 500; line-height: 20px; color: var(--body); }
+.card__footer { display: flex; align-items: center; justify-content: space-between; padding-top: 4px; }
+.card__tags { list-style: none; padding: 0; display: flex; gap: 8px; }
+.card__tags li { background: var(--tag-bg); color: #f0f0f0; font-size: 13px; font-weight: 500; padding: 4px 8px; border-radius: 6px; }
+.card__links { display: flex; gap: 16px; align-items: center; }
+.card__links a { display: flex; }
+
+@media (max-width: 800px) {
+  .projects__grid { grid-template-columns: 1fr; }
+  .hero { height: 620px; }
+}
