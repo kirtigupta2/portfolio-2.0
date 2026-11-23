@@ -11,7 +11,8 @@ body {
   color: var(--text);
   font-family: Inter, system-ui, sans-serif;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 a { color: inherit; text-decoration: none; }
 h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
@@ -23,21 +24,20 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
   border-left: 1px dashed var(--border);
   border-right: 1px dashed var(--border);
   min-height: 100vh;
+  border-top: 0;
 }
 
 /* Nav (full-bleed bar) */
 .nav {
-  height: 80px;
+  align-self: stretch; position: sticky; top: 0; z-index: 10;
+  background: #000;
+  border-bottom: 1px dashed var(--border);
+}
+.nav__inner {
+  width: 1099px; max-width: 100%; height: 79px; margin: 0 auto;
   display: flex; align-items: center; justify-content: center;
-  border-bottom: 1px dashed var(--border);
-  position: relative;
+  border-left: 1px dashed var(--border); border-right: 1px dashed var(--border);
 }
-.nav::before, .nav::after {
-  content: ""; position: absolute; bottom: -1px; height: 1px; width: 100vw;
-  border-bottom: 1px dashed var(--border);
-}
-.nav::before { right: 100%; }
-.nav::after { left: 100%; }
 .nav__links { display: flex; align-items: center; gap: 26px; }
 .nav__item { font-size: 15px; font-weight: 500; color: #9a9a9a; display: flex; align-items: center; gap: 5px; }
 .nav__item:hover { color: #fff; }
