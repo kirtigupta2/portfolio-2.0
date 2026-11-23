@@ -10,8 +10,8 @@
   <header class="nav">
     <div class="nav__inner">
       <nav class="nav__links" aria-label="Primary">
-        <a class="nav__item nav__item--tab nav__item--active" href="index.html" aria-current="page">Home<img class="nav__underline" src="assets/line2.svg" alt=""></a>
-        <a class="nav__item nav__item--tab" href="work.html">Work<img class="nav__underline" src="assets/line2.svg" alt=""></a>
+        <a class="nav__item nav__item--tab nav__item--active" href="#home" aria-current="page">Home<img class="nav__underline" src="assets/line2.svg" alt=""></a>
+        <a class="nav__item nav__item--tab" href="#work">Work<img class="nav__underline" src="assets/line2.svg" alt=""></a>
         <a class="nav__item nav__item--tab" href="about.html">About<img class="nav__underline" src="assets/line2.svg" alt=""></a>
         <a class="nav__item nav__item--more" href="#resume">Resume <img src="assets/arrow.svg" width="14" height="14" alt=""></a>
         <button class="nav__theme" type="button" aria-label="Toggle theme"><img src="assets/theme-sun.svg" width="18" height="18" alt=""></button>
@@ -129,6 +129,21 @@
       });
     })();
 
+
+    // Nav: Home / Work swap on click (scrolling manually never changes the tab, except back at the very top).
+    // About is a separate page, so it is a normal link.
+    const tabs = [...document.querySelectorAll('.nav__item--tab[href^="#"]')];
+    function setActive(hash) {
+      const target = tabs.find(t => t.getAttribute('href') === hash) || tabs[0];
+      tabs.forEach(t => {
+        const on = t === target;
+        t.classList.toggle('nav__item--active', on);
+        on ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current');
+      });
+    }
+    tabs.forEach(t => t.addEventListener('click', () => setActive(t.getAttribute('href'))));
+    addEventListener('scroll', () => { if (scrollY < 10) setActive('#home'); }, { passive: true });
+    setActive(tabs.some(t => t.getAttribute('href') === location.hash) ? location.hash : '#home');
 
     const tpl = document.getElementById('card');
     document.querySelectorAll('.projects__grid').forEach(grid => {
