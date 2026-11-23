@@ -54,25 +54,25 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .hero { position: relative; height: 571px; overflow: hidden; }
 .hero__ellipse { position: absolute; left: 464px; top: 349px; transform: rotate(-29.3deg); }
 .hero__title { position: absolute; font-size: 64px; line-height: normal; color: var(--text); white-space: nowrap; }
-.hero__title--a { left: 153px; top: 81px; }
-.hero__title--b { left: 646px; top: 178px; }
+.hero__title--a { left: 206px; top: 81px; }
+.hero__title--b { left: 697px; top: 178px; }
 .hero__photo { position: absolute; width: 344px; height: 396px; left: calc(50% - 24px - 172px); top: 50px; object-fit: cover; }
 /* Arrows: outer box from Figma insets; inner box is the rotated vector (Figma's rotation math, precomputed) */
 .hero__arrow { position: absolute; }
 .hero__arrow-inner { position: absolute; left: 50%; top: 50%; }
 .hero__arrow-inner img { position: absolute; max-width: none; display: block; }
-.hero__arrow--a { left: 317.3px; top: 301px; width: 82.1px; height: 55.7px; }
+.hero__arrow--a { left: 349.3px; top: 251px; width: 82.1px; height: 55.7px; }
 .hero__arrow--a .hero__arrow-inner { width: 72.5px; height: 37.6px; transform: translate(-50%, -50%) rotate(163.76deg) scaleX(-1) skewX(-3.03deg); }
 .hero__arrow--a img { left: -0.69%; top: -1.85%; width: 101.38%; height: 103.17%; }
-.hero__arrow--b { left: 725.5px; top: 326.2px; width: 73.9px; height: 76px; }
-.hero__arrow--b .hero__arrow-inner { width: 68.4px; height: 39.9px; transform: translate(-50%, -50%) rotate(-125.08deg) skewX(-4.75deg); }
+.hero__arrow--b { left: 707px; top: 325.8px; width: 70.8px; height: 76.4px; }
+.hero__arrow--b .hero__arrow-inner { width: 68.6px; height: 40px; transform: translate(-50%, -50%) rotate(-120.38deg) skewX(-4.75deg); }
 .hero__arrow--b img { left: -0.73%; top: -1.84%; width: 101.46%; height: 103.09%; }
 .hand {
   position: absolute; font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive;
   font-size: 16px; line-height: 23px; color: #ececec;
 }
-.hand--left { left: 65px; top: 364px; width: 265px; text-align: right; }
-.hand--right { left: 645px; top: 419px; width: 391px; }
+.hand--left { left: 97px; top: 314px; width: 265px; text-align: right; }
+.hand--right { left: 675px; top: 411px; width: 429px; font-size: 20px; line-height: 28px; }
 
 /* Projects */
 .projects { border-top: 1px dashed var(--border); padding: 16px 0 24px; display: flex; flex-direction: column; gap: 16px; }
