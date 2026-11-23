@@ -27,7 +27,7 @@
       <div class="hero__arrow hero__arrow--a"><div class="hero__arrow-inner"><img src="assets/vector.svg" alt=""></div></div>
       <div class="hero__arrow hero__arrow--b"><div class="hero__arrow-inner"><img src="assets/vector1.svg" alt=""></div></div>
       <p class="hand hand--left">prev a summer intern @ Accenture Song</p>
-      <p class="hand hand--right">I connect what people need with what a business is striving to achieve, then ideate, sketch and build ideas that bring the two together.</p>
+      <p class="hand hand--right">I connect what <span class="mark">people need with what a business is striving to achieve, then ideate, sketch and build ideas</span> that bring the two together.</p>
     </section>
 
     <section class="projects" id="work">
@@ -62,7 +62,72 @@
     </article>
   </template>
 
+  <!-- Rough-edge filter gives the marker stroke its hand-drawn, slightly torn edges -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="marker-rough" x="-5%" y="-30%" width="110%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04 0.35" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
   <script>
+    // ---- Highlighter marker: sweeps over the .mark phrase, one stroke per rendered line ----
+    (function () {
+      const mark = document.querySelector('.mark');
+      const host = mark.closest('p');
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Tuning knobs
+      const START_DELAY = 900;   // ms after the page is ready
+      const SPEED = 0.75;        // px per ms the marker travels
+      const MIN_MS = 450, GAP_MS = 120;   // min stroke time / pause when "moving" to the next line
+      const EASE = 'cubic-bezier(.5,.05,.3,1)';
+
+      let layer = host.querySelector('.marker-layer');
+      let animated = false;
+
+      function build() {
+        if (layer) layer.remove();
+        layer = document.createElement('span');
+        layer.className = 'marker-layer';
+        host.prepend(layer);
+        const hb = host.getBoundingClientRect();
+        const rects = [...mark.getClientRects()].filter(r => r.width > 2);
+        let t = START_DELAY;
+        rects.forEach((r, i) => {
+          const wrap = document.createElement('span');
+          wrap.className = 'marker-stroke';
+          // slight overshoot past the text and a touch taller than the line, like a real marker pass
+          const padX = 5, padY = 3;
+          Object.assign(wrap.style, {
+            left: (r.left - hb.left - padX) + 'px',
+            top: (r.top - hb.top - padY + (i % 2 ? 1 : -1)) + 'px',
+            width: (r.width + padX * 2) + 'px',
+            height: (r.height + padY * 2) + 'px',
+            '--tilt': ((i % 2 ? 0.5 : -0.4) + (i * 0.15)) + 'deg',
+            '--shape': 'var(--shape-' + (i % 3) + ')',
+          });
+          layer.append(wrap);
+          const dur = Math.max(MIN_MS, r.width / SPEED);
+          if (reduce || animated) {
+            wrap.style.clipPath = 'inset(0)';
+          } else {
+            wrap.animate(
+              [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)' }],
+              { duration: dur, delay: t, easing: EASE, fill: 'both' }
+            );
+            t += dur + GAP_MS;
+          }
+        });
+      }
+
+      // Build after fonts load so line breaks are final, then replay only once.
+      (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => {
+        build();
+        animated = true;
+        let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(build, 150); });
+      });
+    })();
+
     // Active nav tab follows the section in view (and updates on click via the scroll it triggers)
     const tabs = [...document.querySelectorAll('.nav__item--tab')];
     const navH = document.querySelector('.nav').offsetHeight;
