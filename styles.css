@@ -14,6 +14,8 @@ body {
   flex-direction: column;
   align-items: center;
 }
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 80px; }
 a { color: inherit; text-decoration: none; }
 h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 
@@ -41,8 +43,10 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .nav__links { display: flex; align-items: center; gap: 26px; }
 .nav__item { font-size: 15px; font-weight: 500; color: #9a9a9a; display: flex; align-items: center; gap: 5px; }
 .nav__item:hover { color: #fff; }
-.nav__item--active { flex-direction: column; gap: 3px; color: #fff; font-weight: 600; }
-.nav__underline { width: 41px; display: block; }
+.nav__item--tab { position: relative; }
+.nav__item--active { color: #fff; font-weight: 600; }
+.nav__underline { position: absolute; left: 0; bottom: -4px; width: 100%; height: 1px; display: none; }
+.nav__item--active .nav__underline { display: block; }
 .nav__theme { background: none; border: 0; padding: 0; cursor: pointer; display: flex; }
 
 /* Hero: 571px tall, coordinates from Figma column */
