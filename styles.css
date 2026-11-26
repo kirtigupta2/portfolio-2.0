@@ -84,6 +84,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .nav__item--active, .nav__item--active:hover { color: var(--nav-active); font-weight: 600; }
 .nav__item--active .nav__theme { background: none; border: 0; padding: 0; cursor: pointer; display: flex; border-radius: 4px; }
 .nav__theme:disabled { background: none; border: 0; color: inherit; opacity: 1; }
+.nav__theme[hidden] { display: none; }   /* sun icon hidden for now */
 .nav__theme:focus-visible { outline: 1px dashed var(--nav); outline-offset: 4px; }
 
 /* Hero: 571px tall, coordinates from Figma column */
@@ -99,7 +100,9 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .hero__title { position: absolute; font-size: 67.112px; line-height: normal; color: var(--text); white-space: nowrap; }
 .hero__title--a { left: 185.17px; top: 95.51px; }
 .hero__title--b { left: 700.04px; top: 200.37px; }
-.hero__photo { position: absolute; width: 360.822px; height: 415.146px; left: calc(50% - 64.75px - 180.411px); top: 63px; object-fit: cover; }
+.hero__photo { position: absolute; width: 360.822px; height: 415.146px; left: calc(50% - 64.75px - 180.411px); top: 63px; object-fit: cover;
+  /* make the cutout pop: soft red rim glow + a touch more contrast and colour */
+  filter: drop-shadow(0 0 2px rgba(255,255,255,.28)) drop-shadow(0 0 26px rgba(210,3,40,.38)) drop-shadow(0 14px 22px rgba(0,0,0,.55)) saturate(1.1) contrast(1.05); }
 /* Arrows: outer box from Figma insets; inner box is the rotated vector (Figma's rotation math, precomputed) */
 .hero__arrow { position: absolute; }
 .hero__arrow-inner { position: absolute; left: 50%; top: 50%; }
