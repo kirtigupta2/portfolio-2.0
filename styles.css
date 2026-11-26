@@ -51,7 +51,9 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .nav__theme { background: none; border: 0; padding: 0; cursor: pointer; display: flex; }
 
 /* Hero: 571px tall, coordinates from Figma column */
-.hero { position: relative; height: 571px; overflow: hidden; }
+/* First fold: the hero fills the window below the nav, so nothing of "Featured Projects" shows until you scroll.
+   (623px = the 571px of hero art + the 52px gap Figma leaves before the next section.) */
+.hero { position: relative; min-height: max(623px, calc(100vh - 80px)); min-height: max(623px, calc(100svh - 80px)); overflow: hidden; }
 .hero__ellipse { position: absolute; left: 473.9px; top: 348.6px; transform: rotate(-29.3deg); }
 .hero__title { position: absolute; font-size: 67.112px; line-height: normal; color: var(--text); white-space: nowrap; }
 .hero__title--a { left: 185.17px; top: 95.51px; }
@@ -82,7 +84,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .projects { border-top: 1px dashed var(--border); padding: 16px 0 24px; display: flex; flex-direction: column; gap: 16px; }
 .projects__header { padding: 0 28px 0 20px; }
 .projects__header h2 { font-size: 28px; white-space: nowrap; flex-shrink: 0; }
-.projects--work { padding-bottom: 0; margin-top: 52px; }   /* Figma: section starts at 703px */
+.projects--work { padding-bottom: 0; }   /* starts at 703px at the Figma size (hero min-height includes the 52px gap) */
 /* Clickable project cards: a stretched link covers the card; the footer icons sit above it */
 .card { position: relative; }
 .card__link { position: absolute; inset: 0; z-index: 1; }
@@ -125,7 +127,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 
 @media (max-width: 800px) {
   .projects__grid { grid-template-columns: 1fr; }
-  .hero { height: 620px; }
+  .hero { min-height: max(700px, calc(100svh - 80px)); }
 }
 
 /* Figma spacing: gap above "About my process" and trailing space below it */
