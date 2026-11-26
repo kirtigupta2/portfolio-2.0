@@ -56,7 +56,7 @@
 
   <template id="card">
     <article class="card">
-      <img class="card__image" alt="">
+      <div class="card__media"><img class="card__image" alt=""></div>
       <div class="card__title-row">
         <div class="card__titles">
           <p class="card__name"></p>
@@ -162,7 +162,7 @@
     const DESC = 'Three brand specific metrics help a solo operator gauge demand for customization and see how many complete bundles are ready to ship.';
     const TAGS = ['Data Visualization', 'Dashboard Design', 'E- commerce'];
     const PROJECTS = [
-      { name: 'Svaroots',  image: 'assets/project-svaroots.png',  height: 377, status: 'Live', box: 1 },
+      { name: 'Svaroots',  image: 'assets/project-svaroots.png',  height: 377, status: 'Live', box: 1, hover: 'assets/project-svaroots-hover.png' },  // hover: red tab rises ("Click to read on Behance")
       { name: 'Vitta',     image: 'assets/project-vitta.png',     height: 378, status: 'Live', box: 2 },
       { name: 'Breezy',    image: 'assets/project-breezy.png',    height: 416, status: 'Live', box: 3 },
       { name: 'PromptKit', image: 'assets/project-promptkit.png', height: 416, status: 'Coming Soon', box: 0 },  // no box image 4 in Figma yet
@@ -181,6 +181,12 @@
       card.addEventListener('mouseenter', () => showBox(p.box));
       card.addEventListener('focus', () => showBox(p.box));
       const img = el.querySelector('.card__image'); img.src = p.image; img.alt = p.name + ' project preview'; img.style.height = p.height + 'px';
+      if (p.hover) {
+        // Hovered artwork sits on top, bottom-aligned (it is ~10px taller: the red tab rises above the folder)
+        const hov = document.createElement('img');
+        hov.className = 'card__hover'; hov.src = p.hover; hov.alt = ''; hov.setAttribute('aria-hidden', 'true');
+        img.parentElement.append(hov);
+      }
       el.querySelector('.card__name').textContent = p.name;
       el.querySelector('.card__tagline').textContent = TAGLINE;
       el.querySelector('.card__dot').src = p.status === 'Live' ? 'assets/dot.svg' : 'assets/dot-soon.svg';
