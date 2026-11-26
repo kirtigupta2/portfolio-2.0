@@ -91,6 +91,9 @@
       const MIN_MS = 450, GAP_MS = 120;   // min stroke time / pause when "moving" to the next line
       const EASE = 'cubic-bezier(.5,.05,.3,1)';
 
+      // Marker-on-paper sound: one play per stroke, started with the stroke (browsers may block sound before the first click/tap/key press)
+      const sfx = new Audio('assets/highlighter.mp3'); sfx.preload = 'auto'; sfx.volume = 0.7;
+      function playSfx() { try { const a = sfx.cloneNode(); a.volume = sfx.volume; const p = a.play(); if (p && p.catch) p.catch(() => {}); } catch (e) {} }
       let layer = host.querySelector('.marker-layer');
       let animated = false;
 
@@ -124,6 +127,7 @@
               [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)' }],
               { duration: dur, delay: t, easing: EASE, fill: 'both' }
             );
+            setTimeout(playSfx, t);
             t += dur + GAP_MS;
           }
         });
