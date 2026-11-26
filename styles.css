@@ -147,7 +147,8 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 /* Svaroots hover: the red tab (a separate image, always visible) slides up 10px; the folder image never moves.
    The folder picture has NO tab of its own (only the flap's shadow strip), so there is never a second tab to fade or hide.
    The clip below is the shape of the folder's front flap, so the tab always slides in behind it. */
-.card__tab { position: absolute; left: 350px; top: -10px; width: 195px; height: 72px; overflow: hidden; pointer-events: none;
+.hero__figure { display: contents; }
+.card__tab { zoom: var(--z, 1); position: absolute; left: 350px; top: -10px; width: 195px; height: 72px; overflow: hidden; pointer-events: none;
   clip-path: polygon(6.5px 0, 187.5px 0, 187.25px 54px, 186.25px 54px, 185.25px 54px, 184.25px 54px, 183.25px 54px, 182.25px 54px, 181.25px 54px, 180.25px 54px, 179.25px 54px, 178.25px 54px, 177.25px 54px, 176.25px 54px, 175.25px 54px, 174.25px 54px, 173.25px 54px, 172.25px 54px, 171.25px 54px, 170.25px 54px, 169.25px 54px, 168.25px 54px, 167.25px 54px, 166.25px 54px, 165.25px 54px, 164.25px 54px, 163.25px 54px, 162.25px 54px, 161.25px 54px, 160.25px 53.5px, 159.25px 53.5px, 158.25px 53.5px, 157.25px 54px, 156.25px 54px, 155.25px 53.5px, 154.25px 54px, 153.25px 54px, 152.25px 54px, 151.25px 54px, 150.25px 54px, 149.25px 54px, 148.25px 54px, 147.25px 54px, 146.25px 54px, 145.25px 54px, 144.25px 54px, 143.25px 54px, 142.25px 54px, 141.25px 54px, 140.25px 54px, 139.25px 53.5px, 138.25px 53.5px, 137.25px 53.5px, 136.25px 54px, 135.25px 53.5px, 134.25px 54px, 133.25px 54px, 132.25px 54px, 131.25px 54px, 130.25px 54px, 129.25px 54px, 128.25px 54px, 127.25px 54px, 126.25px 54px, 125.25px 54px, 124.25px 54px, 123.25px 54px, 122.25px 54px, 121.25px 54px, 120.25px 54px, 119.25px 53.5px, 118.25px 54px, 117.25px 54px, 116.25px 54px, 115.25px 54px, 114.25px 54px, 113.25px 54px, 112.25px 53.5px, 111.25px 53.5px, 110.25px 54px, 109.25px 54px, 108.25px 54px, 107.25px 54px, 106.25px 54px, 105.25px 53.5px, 104.25px 54px, 103.25px 54px, 102.25px 54px, 101.25px 54px, 100.25px 54px, 99.25px 54px, 98.25px 54px, 97.25px 54px, 96.25px 54px, 95.25px 54px, 94.25px 54px, 93.25px 54px, 92.25px 54px, 91.25px 54px, 90.25px 54px, 89.25px 54px, 88.25px 54px, 87.25px 54px, 86.25px 54px, 85.25px 54px, 84.25px 54px, 83.25px 54px, 82.25px 54px, 81.25px 54px, 80.25px 54px, 79.25px 54px, 78.25px 54px, 77.25px 54px, 76.25px 54px, 75.25px 54px, 74.25px 54px, 73.25px 54px, 72.25px 54px, 71.25px 54px, 70.25px 54px, 69.25px 53.5px, 68.25px 54px, 67.25px 54px, 66.25px 54px, 65.25px 53.5px, 64.25px 53.5px, 63.25px 53.5px, 62.25px 53.5px, 61.25px 54px, 60.25px 54px, 59.25px 54px, 58.25px 54px, 57.25px 54px, 56.25px 54px, 55.25px 54px, 54.25px 54px, 53.25px 54px, 52.25px 54px, 51.25px 54px, 50.25px 54px, 49.25px 54px, 48.25px 54px, 47.25px 54px, 46.25px 53.5px, 45.25px 54px, 44.25px 54px, 43.25px 54px, 42.25px 54px, 41.25px 54px, 40.25px 54px, 39.25px 53.5px, 38.25px 54px, 37.25px 53.5px, 36.25px 54px, 35.25px 54px, 34.25px 54px, 33.25px 54px, 32.25px 53.5px, 31.25px 54px, 30.25px 54px, 29.25px 54px, 28.25px 54px, 27.25px 54px, 26.25px 54px, 25.25px 54px, 24.25px 54px, 23.25px 54px, 22.25px 54px, 21.25px 54px, 20.25px 54px, 19.25px 54px, 18.25px 54px, 17.25px 53.5px, 16.25px 53.5px, 15.25px 53.5px, 14.25px 53px, 13.25px 52.5px, 12.25px 52px, 11.25px 51.5px, 10.25px 51px, 9.25px 50px, 8.25px 48.5px, 7.25px 47.5px, 6.75px 47px); }
 .card__tab-inner { position: absolute; left: 0; top: 14px; width: 195px; height: 58px; transform: translateY(0); will-change: transform;
   transition: transform .34s cubic-bezier(.22,.8,.26,1); }
@@ -196,6 +197,48 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 }
 @media (prefers-reduced-motion: reduce) { .marker-stroke { clip-path: inset(0); } }
 
-/* Typewriter caret on the hero words */
-.hero__title.typing::after { content: ""; display: inline-block; width: 3px; height: .82em; margin-left: 5px; background: currentColor; vertical-align: -.04em; animation: caret-blink .75s steps(1) infinite; }
-@keyframes caret-blink { 50% { opacity: 0; } }
+
+/* ================= Phones & small tablets ================= */
+@media (max-width: 1100px) {
+  .nav__inner { padding: 0 12px; }
+  .nav__links { gap: 14px; }
+  .nav__item { font-size: 15px; }
+  .nav__item img { width: 14px; height: 14px; }
+
+  /* Hero stacks: words, photo, notes. (Desktop uses fixed coordinates from the Figma frame.) */
+  .hero { min-height: calc(100svh - 80px); display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 28px 16px 36px; gap: 8px; }
+  .hero__heading { position: relative; z-index: 0; align-self: stretch; display: flex; flex-direction: column; margin: 0; }
+  .hero__title { position: static; font-size: clamp(40px, 12.5vw, 67px); }
+  .hero__title--a { align-self: flex-start; margin-left: 6px; }
+  .hero__title--b { align-self: flex-end; margin-right: 6px; margin-top: 2px; }
+  .hero__figure { display: block; position: relative; z-index: 1; width: min(300px, 72vw); margin: -32px auto 0; }
+  .hero__photo { position: static; display: block; width: 100%; height: auto; transform: none; }
+  .hero__ellipse { left: 50%; top: auto; bottom: -22px; margin-left: -100px; z-index: -1; transform: rotate(-29.3deg) scale(1.15); }
+  .hero__arrow { display: none; }
+  .hand, .hand-group { position: static; transform: none; width: auto; text-align: center; white-space: normal; }
+  .hand--left { margin-top: 26px; }
+  .hand-group { justify-content: center; }
+  .hand--right { position: relative; left: auto; top: auto; text-align: left; font-size: 19px; line-height: 27px; max-width: 460px; padding: 0 6px; margin-top: 14px; }
+}
+@media (max-width: 800px) {
+  .column { padding-bottom: 90px; }
+  #about { margin-top: 0; }
+  .projects__header { padding: 0 16px; }
+  .projects__header h2 { font-size: 24px; }
+  .projects__grid { row-gap: 0; }
+  .projects__grid .card:nth-child(n+2) { border-top: 1px dashed var(--border); }
+  .card { padding: 14px; gap: 12px; border-right: 0; }
+  .card__media { width: 100%; }
+  .card__image { height: auto !important; }
+  .card__name { font-size: 20px; }
+  .card__tagline { font-size: 14px; }
+  .card__desc { font-size: 15px; }
+  .card__footer { flex-wrap: wrap; gap: 12px; }
+  .card__tags { flex-wrap: wrap; gap: 6px; }
+  .card__tags li { font-size: 13px; padding: 5px 7px; }
+  .card__tab { display: none; }          /* the hover tab only makes sense with a mouse */
+  .about-board__card { padding: 10px; border-right: 0; }
+  .about-board__card img { height: auto; width: 100%; }
+}
+@media (hover: none) { .card__tab { display: none; } }

@@ -28,12 +28,14 @@
   </header>
   <div class="column">
     <section class="hero" id="home">
-      <div class="hero__ellipse" id="hero-ellipse" aria-hidden="true"></div>
       <h1 class="hero__heading" id="hero-heading" aria-live="polite">
         <span class="hero__title hero__title--a" id="hero-word-a">Welcome to</span>
         <span class="hero__title hero__title--b" id="hero-word-b">Kirti’s portfolio</span>
       </h1>
-      <img class="hero__photo" src="assets/image5.png" alt="Portrait of Kirti holding a coffee cup">
+      <div class="hero__figure">
+        <div class="hero__ellipse" id="hero-ellipse" aria-hidden="true"></div>
+        <img class="hero__photo" src="assets/image5.png" alt="Portrait of Kirti holding a coffee cup">
+      </div>
       <div class="hero__arrow hero__arrow--a"><div class="hero__arrow-inner"><img src="assets/vector.svg" alt=""></div></div>
       <div class="hero__arrow hero__arrow--b"><div class="hero__arrow-inner"><img src="assets/vector1.svg" alt=""></div></div>
       <p class="hand hand--left">prev a summer intern @</p>
@@ -167,38 +169,25 @@
       });
     })();
 
-    // ---- Typewriter: once the highlighter has finished, the hero words are deleted letter by letter
-    //      ("Welcome to / Kirti's portfolio") and "Product / Designer" is typed in their place ----
+    // ---- 3 seconds after the page loads, the hero words change: "Welcome to / Kirti's portfolio" -> "Product / Designer" ----
     (function () {
       const a = document.getElementById('hero-word-a'), b = document.getElementById('hero-word-b');
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const PAUSE_AFTER_HIGHLIGHT = 700;     // ms to let the finished highlight breathe
-      const DELETE_MS = 42, TYPE_MS = 85;    // ms per letter
-      const sleep = ms => new Promise(r => setTimeout(r, ms));
-      async function erase(el) {
-        el.classList.add('typing');
-        while (el.textContent.length) { el.textContent = el.textContent.slice(0, -1); await sleep(DELETE_MS); }
+      const DELAY = 3000;                                   // ms after load
+      function swap(el, text, left, wait) {
+        const apply = () => { el.textContent = text; if (left) el.style.left = left; };
+        if (reduce) { setTimeout(apply, wait); return; }
+        setTimeout(() => {
+          el.animate([{ opacity: 1, transform: 'translateY(0)' }, { opacity: 0, transform: 'translateY(-16px)' }],
+                     { duration: 380, easing: 'cubic-bezier(.5,0,.9,.5)', fill: 'forwards' }).finished.then(() => {
+            apply();                                        // new word + its Figma position, swapped while invisible
+            el.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'translateY(0)' }],
+                       { duration: 520, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
+          });
+        }, wait);
       }
-      async function type(el, text) {
-        el.classList.add('typing');
-        for (const ch of text) { el.textContent += ch; await sleep(TYPE_MS + Math.random() * 40); }
-      }
-      let started = false;
-      async function run() {
-        if (started) return; started = true;
-        if (reduce) { a.textContent = 'Product'; a.style.left = '291.17px'; b.textContent = 'Designer'; return; }
-        await sleep(PAUSE_AFTER_HIGHLIGHT);
-        await Promise.all([erase(a), erase(b)]);       // type back (delete)
-        a.classList.remove('typing'); b.classList.remove('typing');
-        await sleep(280);
-        a.style.left = '291.17px';                     // Figma position of "Product"
-        await type(a, 'Product'); a.classList.remove('typing');
-        await sleep(160);
-        await type(b, 'Designer');
-        setTimeout(() => b.classList.remove('typing'), 2250);   // caret blinks 3 times (3 x 0.75s), then goes
-      }
-      addEventListener('highlight-done', run, { once: true });
-      setTimeout(run, 12000);                          // safety net if the highlighter never reports
+      const start = () => { swap(a, 'Product', '291.17px', DELAY); swap(b, 'Designer', null, DELAY + 120); };
+      document.readyState === 'complete' ? start() : addEventListener('load', start, { once: true });
     })();
 
     // Nav: Home / Work swap on click (scrolling manually never changes the tab, except back at the very top).
@@ -268,6 +257,9 @@
     ];
     const tpl = document.getElementById('card');
     const grid = document.getElementById('work-grid');
+    // Keep the hover tabs aligned when the card images shrink (cards narrower than 566px)
+    function fitTabs() { document.querySelectorAll('.card__media').forEach(m => { m.style.setProperty('--z', Math.min(1, m.clientWidth / 566)); }); }
+    if (window.ResizeObserver) new ResizeObserver(fitTabs).observe(grid); else addEventListener('resize', fitTabs);
     PROJECTS.forEach(p => {
       const el = tpl.content.cloneNode(true);
       const card = el.querySelector('.card');
@@ -299,6 +291,7 @@
       TAGS.forEach(t => { const li = document.createElement('li'); li.textContent = t; el.querySelector('.card__tags').append(li); });
       grid.append(el);
     });
+    fitTabs();
   </script>
 </body>
 </html>
