@@ -17,6 +17,7 @@
   <header class="nav">
     <div class="nav__inner">
       <nav class="nav__links" aria-label="Primary">
+        <span class="nav__circle" id="nav-circle" aria-hidden="true"></span>
         <a class="nav__item nav__item--tab nav__item--active" href="#home" aria-current="page">Home<img class="nav__underline" src="assets/line2.svg" data-dark="assets/line2.svg" data-light="assets/line2-light.svg" alt=""></a>
         <a class="nav__item nav__item--tab" href="#work">Work<img class="nav__underline" src="assets/line2.svg" data-dark="assets/line2.svg" data-light="assets/line2-light.svg" alt=""></a>
         <a class="nav__item nav__item--tab" href="about.html">About<img class="nav__underline" src="assets/line2.svg" data-dark="assets/line2.svg" data-light="assets/line2-light.svg" alt=""></a>
@@ -190,8 +191,30 @@
         on ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current');
       });
     }
-    tabs.forEach(t => t.addEventListener('click', () => setActive(t.getAttribute('href'))));
-    addEventListener('scroll', () => { if (scrollY < 10) setActive('#home'); }, { passive: true });
+    // Hand-drawn circle: drawn around Home / Work / About when you click it, and it stays on the chosen item
+    const circle = document.getElementById('nav-circle'), links = circle.parentElement;
+    const noMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let circleAnim = null, lastClick = -9999;
+    function drawCircle(item) {
+      const lr = links.getBoundingClientRect(), r = item.getBoundingClientRect();
+      Object.assign(circle.style, {
+        left: (r.left - lr.left - 22) + 'px', top: (r.top - lr.top - 12) + 'px',
+        width: (r.width + 44) + 'px', height: (r.height + 26) + 'px', opacity: 1 });
+      if (circleAnim) circleAnim.cancel();
+      if (noMotion || !circle.animate) return;
+      // the pen draws the ring all the way round, then the last bit of overlap fades in (like the reference video)
+      circleAnim = circle.animate([{ '--p': '0deg' }, { '--p': '372deg' }], { duration: 650, easing: 'cubic-bezier(.45,.05,.3,1)', fill: 'both' });
+    }
+    function hideCircle() { if (circleAnim) circleAnim.cancel(); circle.style.opacity = 0; }
+    tabs.forEach(t => t.addEventListener('click', () => { lastClick = performance.now(); setActive(t.getAttribute('href')); drawCircle(t); }));
+    // About is a different page: let the circle finish drawing before leaving
+    const about = document.querySelector('.nav__item--tab[href="about.html"]');
+    about.addEventListener('click', e => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault(); drawCircle(about);
+      setTimeout(() => { location.href = about.getAttribute('href'); }, noMotion ? 0 : 750);
+    });
+    addEventListener('scroll', () => { if (scrollY < 10) { setActive('#home'); if (performance.now() - lastClick > 1500) hideCircle(); } }, { passive: true });
     setActive(tabs.some(t => t.getAttribute('href') === location.hash) ? location.hash : '#home');
 
     // Project cards (content from the Figma file)
