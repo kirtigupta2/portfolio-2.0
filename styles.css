@@ -85,10 +85,8 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .projects--work { padding-bottom: 0; margin-top: 32px; }   /* Figma: section starts at 683px */
 .projects__header--work { display: flex; align-items: center; gap: 859px; }
 .header-icon { position: relative; width: 100px; height: 84px; flex-shrink: 0; pointer-events: none; }
-/* Box swap: the new image fades in on top while the old one stays fully visible underneath,
-   then the old one disappears (delayed fade-out) - avoids the see-through dip of a plain crossfade. */
-.header-icon img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; z-index: 0; transition: opacity .01s linear .3s; }
-.header-icon img.is-active { opacity: 1; z-index: 1; transition: opacity .3s ease; }
+/* Two stacked box layers; JS fades the top one in over the (opaque) bottom one, then swaps roles */
+.header-icon img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .card:focus-visible { outline: 1px dashed #8f8f8f; outline-offset: -6px; }
 .projects__body { border-top: 1px dashed var(--border); padding-bottom: 24px; }
 .projects__grid { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
@@ -103,10 +101,16 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 }
 .card__media { position: relative; width: 566px; max-width: 100%; align-self: center; }
 .card__image { display: block; width: 100%; height: 417px; object-fit: cover; }
-/* Hovered artwork (Svaroots): same width, bottom-aligned, ~10px taller so the red "Click to read on Behance" tab rises above the folder */
-.card__hover { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; opacity: 0; transform: translateY(10px); transition: opacity .25s ease, transform .3s cubic-bezier(.2,.8,.3,1); pointer-events: none; }
-.card:hover .card__hover, .card:focus-visible .card__hover { opacity: 1; transform: translateY(0); }
-@media (prefers-reduced-motion: reduce) { .card__hover { transition: none; } }
+/* Svaroots hover: only the red tab rises ~10px (the folder image itself never moves).
+   The window is clipped at the folder's front-flap edge so the tab slides up from behind it. */
+.card__tab { position: absolute; left: 350px; top: -10px; width: 195px; height: 59px; overflow: hidden; pointer-events: none; }
+.card__tab-inner { position: absolute; left: 0; top: 0; width: 195px; height: 61px; opacity: 0; transform: translateY(10px);
+  transition: transform .32s cubic-bezier(.2,.8,.25,1), opacity .14s linear; }
+.card__tab-inner img { display: block; width: 100%; height: 100%; }
+.card__tab-inner span { position: absolute; left: 0; right: 0; top: 19px; text-align: center; white-space: nowrap;
+  font: 500 13px/20px Inter, system-ui, sans-serif; color: #fff7f2; }
+.card:hover .card__tab-inner, .card:focus-visible .card__tab-inner { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { .card__tab-inner { transition: none; } }
 .card__title-row { display: flex; justify-content: space-between; align-items: flex-start; }
 .card__titles { display: flex; flex-direction: column; gap: 4px; }
 .card__name { font-family: Impact, 'Anton', sans-serif; font-weight: 400; font-size: 20px; color: #f5f5f5; }

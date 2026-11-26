@@ -35,10 +35,8 @@
       <div class="projects__header projects__header--work">
         <h2>Featured Projects</h2>
         <div class="header-icon" aria-hidden="true">
-          <img class="is-active" src="assets/box-0.png" alt="">
-          <img src="assets/box-1.png" alt="">
-          <img src="assets/box-2.png" alt="">
-          <img src="assets/box-3.png" alt="">
+          <img id="box-a" src="assets/box-0.png" alt="">
+          <img id="box-b" alt="">
         </div>
       </div>
       <div class="projects__body">
@@ -162,16 +160,42 @@
     const DESC = 'Three brand specific metrics help a solo operator gauge demand for customization and see how many complete bundles are ready to ship.';
     const TAGS = ['Data Visualization', 'Dashboard Design', 'E- commerce'];
     const PROJECTS = [
-      { name: 'Svaroots',  image: 'assets/project-svaroots.png',  height: 377, status: 'Live', box: 1, hover: 'assets/project-svaroots-hover.png' },  // hover: red tab rises ("Click to read on Behance")
+      { name: 'Svaroots',  image: 'assets/project-svaroots.png',  height: 377, status: 'Live', box: 1, tab: 'assets/svaroots-tab.png' },  // tab: red card that rises on hover
       { name: 'Vitta',     image: 'assets/project-vitta.png',     height: 378, status: 'Live', box: 2 },
       { name: 'Breezy',    image: 'assets/project-breezy.png',    height: 416, status: 'Live', box: 3 },
       { name: 'PromptKit', image: 'assets/project-promptkit.png', height: 416, status: 'Coming Soon', box: 0 },  // no box image 4 in Figma yet
     ];
     const tpl = document.getElementById('card');
     const grid = document.getElementById('work-grid');
-    // Header box: shows the folder of the hovered/focused card "coming out" of the box (box-0 = nothing hovered)
-    const boxes = [...document.querySelectorAll('.header-icon img')];
-    const showBox = n => boxes.forEach((b, i) => b.classList.toggle('is-active', i === n));
+    // Header box: shows the folder of the hovered/focused card "coming out" of the box (box-0 = nothing hovered).
+    // Two stacked layers: the visible one stays fully opaque while the next fades in over it, then they swap roles.
+    // Changes that arrive mid-fade are queued (latest wins), so the box never pops or thins out.
+    const BOX_SRC = [0, 1, 2, 3].map(n => 'assets/box-' + n + '.png');
+    BOX_SRC.forEach(s => { new Image().src = s; });   // preload
+    const FADE_MS = 280;
+    let under = document.getElementById('box-a'), over = document.getElementById('box-b');
+    under.style.zIndex = 1; over.style.zIndex = 2; over.style.opacity = 0;
+    let shown = 0, wanted = 0, busy = false;
+    function showBox(n) { wanted = n; if (!busy) stepBox(); }
+    function stepBox() {
+      if (wanted === shown) return;
+      busy = true;
+      const n = wanted;
+      over.style.transition = 'none'; over.style.opacity = 0;
+      over.src = BOX_SRC[n];
+      const go = () => {
+        void over.offsetWidth;
+        over.style.transition = 'opacity ' + FADE_MS + 'ms ease';
+        over.style.opacity = 1;
+        setTimeout(() => {                     // fade done: swap roles, reset the new top layer instantly
+          const old = under; under = over; over = old;
+          under.style.zIndex = 1; over.style.zIndex = 2;
+          over.style.transition = 'none'; over.style.opacity = 0;
+          shown = n; busy = false; stepBox();
+        }, FADE_MS + 20);
+      };
+      over.decode ? over.decode().then(go, go) : go();
+    }
     grid.addEventListener('mouseleave', () => showBox(0));
     grid.addEventListener('focusout', () => showBox(0));
     PROJECTS.forEach(p => {
@@ -181,11 +205,12 @@
       card.addEventListener('mouseenter', () => showBox(p.box));
       card.addEventListener('focus', () => showBox(p.box));
       const img = el.querySelector('.card__image'); img.src = p.image; img.alt = p.name + ' project preview'; img.style.height = p.height + 'px';
-      if (p.hover) {
-        // Hovered artwork sits on top, bottom-aligned (it is ~10px taller: the red tab rises above the folder)
-        const hov = document.createElement('img');
-        hov.className = 'card__hover'; hov.src = p.hover; hov.alt = ''; hov.setAttribute('aria-hidden', 'true');
-        img.parentElement.append(hov);
+      if (p.tab) {
+        // Only the red tab moves: it rises ~10px over the (static) folder image and shows live text
+        const tab = document.createElement('div');
+        tab.className = 'card__tab'; tab.setAttribute('aria-hidden', 'true');
+        tab.innerHTML = '<div class="card__tab-inner"><img src="' + p.tab + '" alt=""><span>Click to read on Behance</span></div>';
+        img.parentElement.append(tab);
       }
       el.querySelector('.card__name').textContent = p.name;
       el.querySelector('.card__tagline').textContent = TAGLINE;
