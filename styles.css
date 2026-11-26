@@ -71,7 +71,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 @property --p { syntax: '<angle>'; inherits: false; initial-value: 360deg; }
 .nav__links { display: flex; align-items: center; gap: 26px; position: relative; }
 /* Hand-drawn circle (assets/circle.png as a mask) that a conic mask "draws" around the clicked item */
-.nav__circle { position: absolute; pointer-events: none; opacity: 0; z-index: 0; background: #F7C948;
+.nav__circle { position: absolute; pointer-events: none; opacity: 0; z-index: 0; background: #D20328;
   --p: 360deg;
   -webkit-mask: url(assets/circle.png) center / 100% 100% no-repeat, conic-gradient(from 200deg at 50% 50%, #000 var(--p), transparent 0);
   -webkit-mask-composite: source-in;
@@ -82,9 +82,8 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .nav__item:hover { color: var(--nav-hover); }
 .nav__item--tab { position: relative; }
 .nav__item--active, .nav__item--active:hover { color: var(--nav-active); font-weight: 600; }
-.nav__underline { position: absolute; left: 0; bottom: -4px; width: 100%; height: 1px; display: none; }
-.nav__item--active .nav__underline { display: block; }
-.nav__theme { background: none; border: 0; padding: 0; cursor: pointer; display: flex; border-radius: 4px; }
+.nav__item--active .nav__theme { background: none; border: 0; padding: 0; cursor: pointer; display: flex; border-radius: 4px; }
+.nav__theme:disabled { background: none; border: 0; color: inherit; opacity: 1; }
 .nav__theme:focus-visible { outline: 1px dashed var(--nav); outline-offset: 4px; }
 
 /* Hero: 571px tall, coordinates from Figma column */
