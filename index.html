@@ -7,7 +7,10 @@
   <link rel="stylesheet" href="styles.css">
   <script>
     // Apply the saved theme before the page paints (no flash). Default is the dark theme.
-    try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+    // Theme switching is switched OFF for now (THEME_SWITCH = false): the site always uses the dark theme.
+    // To turn it back on: set THEME_SWITCH to true here and in the theme script further down.
+    var THEME_SWITCH = false;
+    try { if (THEME_SWITCH && localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
   </script>
 </head>
 <body>
@@ -75,14 +78,6 @@
     </article>
   </template>
 
-  <!-- Rough-edge filter gives the marker stroke its hand-drawn, slightly torn edges -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <filter id="marker-rough" x="-5%" y="-30%" width="110%" height="160%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.04 0.35" numOctaves="2" seed="7" result="n"/>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-  </svg>
-
   <script>
     // ---- Highlighter marker: sweeps over the .mark phrase, one stroke per rendered line ----
     (function () {
@@ -110,15 +105,15 @@
           const wrap = document.createElement('span');
           wrap.className = 'marker-stroke';
           // slight overshoot past the text and a touch taller than the line, like a real marker pass
-          const padX = 5, padY = 3;
+          const padX = 10, padY = 9;
           Object.assign(wrap.style, {
             left: (r.left - hb.left - padX) + 'px',
             top: (r.top - hb.top - padY + (i % 2 ? 1 : -1)) + 'px',
             width: (r.width + padX * 2) + 'px',
             height: (r.height + padY * 2) + 'px',
-            '--tilt': ((i % 2 ? 0.5 : -0.4) + (i * 0.15)) + 'deg',
-            '--shape': 'var(--shape-' + (i % 3) + ')',
           });
+          wrap.style.setProperty('--tilt', ((i % 2 ? 0.5 : -0.4) + (i * 0.15)) + 'deg');
+          wrap.style.setProperty('--stroke', 'url(assets/stroke-' + (i % 2 ? 2 : 1) + '.png)');
           layer.append(wrap);
           const dur = Math.max(MIN_MS, r.width / SPEED);
           if (reduce || animated) {
@@ -152,6 +147,8 @@
         btn.setAttribute('aria-pressed', String(light));
         btn.setAttribute('aria-label', light ? 'Switch to the dark theme' : 'Switch to the bright theme');
       }
+      const THEME_SWITCH = false;                         // switch OFF: button disabled, dark theme only
+      if (!THEME_SWITCH) { btn.disabled = true; btn.setAttribute('aria-disabled', 'true'); btn.removeAttribute('aria-pressed'); btn.setAttribute('aria-label', 'Theme switch (coming soon)'); btn.style.cursor = 'default'; apply('dark'); return; }
       apply(root.dataset.theme === 'light' ? 'light' : 'dark');
       btn.addEventListener('click', () => {
         const next = root.dataset.theme === 'light' ? 'dark' : 'light';
