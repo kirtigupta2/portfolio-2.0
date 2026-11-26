@@ -34,9 +34,6 @@
     <section class="projects projects--work" id="work">
       <div class="projects__header projects__header--work">
         <h2>Featured Projects</h2>
-        <div class="header-icon" aria-hidden="true">
-          <canvas id="box-canvas" width="300" height="252"></canvas>
-        </div>
       </div>
       <div class="projects__body">
         <div class="projects__grid" id="work-grid"></div>
@@ -159,67 +156,17 @@
     const DESC = 'Three brand specific metrics help a solo operator gauge demand for customization and see how many complete bundles are ready to ship.';
     const TAGS = ['Data Visualization', 'Dashboard Design', 'E- commerce'];
     const PROJECTS = [
-      { name: 'Svaroots',  image: 'assets/project-svaroots.png',  height: 377, status: 'Live', box: 1, tab: 'assets/svaroots-tab.png' },  // tab: red card that rises on hover
-      { name: 'Vitta',     image: 'assets/project-vitta.png',     height: 378, status: 'Live', box: 2 },
-      { name: 'Breezy',    image: 'assets/project-breezy.png',    height: 416, status: 'Live', box: 3 },
-      { name: 'PromptKit', image: 'assets/project-promptkit.png', height: 416, status: 'Coming Soon', box: 0 },  // no box image 4 in Figma yet
+      { name: 'Svaroots',  image: 'assets/project-svaroots.png',  height: 377, status: 'Live', tab: 'assets/svaroots-tab.png' },  // tab: red card that rises on hover
+      { name: 'Vitta',     image: 'assets/project-vitta.png',     height: 378, status: 'Live' },
+      { name: 'Breezy',    image: 'assets/project-breezy.png',    height: 416, status: 'Live' },
+      { name: 'PromptKit', image: 'assets/project-promptkit.png', height: 416, status: 'Coming Soon' },
     ];
     const tpl = document.getElementById('card');
     const grid = document.getElementById('work-grid');
-    // Header box: shows the folder of the hovered/focused card "coming out" of the box (box-0 = nothing hovered).
-    // One canvas blends all four box images by weight. Weights glide toward the hovered image and always sum to 1,
-    // drawn additively ("lighter"), so every frame is a true mix of the images: no layer is ever added or removed,
-    // nothing pops, and moving to another card mid-glide just changes the target smoothly.
-    const BOX_SRC = [0, 1, 2, 3].map(n => 'assets/box-' + n + '.png');
-    const boxCanvas = document.getElementById('box-canvas');
-    const bctx = boxCanvas.getContext('2d');
-    bctx.imageSmoothingQuality = 'high';
-    const boxImgs = BOX_SRC.map(s => { const im = new Image(); im.onload = () => drawBox(); im.src = s; return im; });
-    const OMEGA = 17;                                 // spring stiffness: higher = faster (about 0.35s to settle)
-    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let weights = [1, 0, 0, 0], vel = [0, 0, 0, 0], goal = 0, raf = 0, last = 0;
-    function drawBox() {
-      bctx.globalCompositeOperation = 'source-over';
-      bctx.clearRect(0, 0, boxCanvas.width, boxCanvas.height);
-      bctx.globalCompositeOperation = 'lighter';
-      boxImgs.forEach((im, i) => {
-        if (weights[i] > 0.001 && im.complete && im.naturalWidth) {
-          bctx.globalAlpha = Math.min(1, weights[i]);
-          bctx.drawImage(im, 0, 0, boxCanvas.width, boxCanvas.height);
-        }
-      });
-      bctx.globalAlpha = 1;
-    }
-    function tickBox(now) {
-      // Critically damped spring per weight: eases in and out, keeps its momentum if the target changes mid-move,
-      // and (being linear) keeps the weights summing to 1.
-      let remaining = Math.min(0.05, (now - last) / 1000 || 0.016); last = now;
-      while (remaining > 0) {
-        const h = Math.min(0.004, remaining); remaining -= h;
-        for (let i = 0; i < 4; i++) {
-          const g = i === goal ? 1 : 0;
-          vel[i] += (OMEGA * OMEGA * (g - weights[i]) - 2 * OMEGA * vel[i]) * h;
-          weights[i] += vel[i] * h;
-        }
-      }
-      const settled = weights.every((w, i) => Math.abs((i === goal ? 1 : 0) - w) < 0.003 && Math.abs(vel[i]) < 0.03);
-      if (settled) { weights = weights.map((_, i) => (i === goal ? 1 : 0)); vel = [0, 0, 0, 0]; }
-      drawBox();
-      raf = settled ? 0 : requestAnimationFrame(tickBox);
-    }
-    function showBox(n) {
-      goal = n;
-      if (reduceMotion) { weights = weights.map((_, i) => (i === n ? 1 : 0)); vel = [0, 0, 0, 0]; drawBox(); return; }
-      if (!raf) { last = performance.now(); raf = requestAnimationFrame(tickBox); }
-    }
-    grid.addEventListener('mouseleave', () => showBox(0));
-    grid.addEventListener('focusout', () => showBox(0));
     PROJECTS.forEach(p => {
       const el = tpl.content.cloneNode(true);
       const card = el.querySelector('.card');
       card.tabIndex = 0;
-      card.addEventListener('mouseenter', () => showBox(p.box));
-      card.addEventListener('focus', () => showBox(p.box));
       const img = el.querySelector('.card__image'); img.src = p.image; img.alt = p.name + ' project preview'; img.style.height = p.height + 'px';
       if (p.tab) {
         // Only the red tab moves: it rises ~10px over the (static) folder image and shows live text

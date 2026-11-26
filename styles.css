@@ -83,11 +83,6 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .projects__header { padding: 0 28px 0 20px; }
 .projects__header h2 { font-size: 28px; white-space: nowrap; flex-shrink: 0; }
 .projects--work { padding-bottom: 0; margin-top: 52px; }   /* Figma: section starts at 703px */
-/* The Figma frame no longer has the picture here; the hover box (built earlier) stays at the right edge of the header */
-.projects__header--work { display: flex; align-items: center; justify-content: space-between; }
-.header-icon { position: relative; width: 100px; height: 84px; flex-shrink: 0; pointer-events: none; }
-/* Box: a canvas (drawn at 3x) that JS blends between the four box images */
-.header-icon canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .card:focus-visible { outline: 1px dashed #8f8f8f; outline-offset: -6px; }
 .projects__body { border-top: 1px dashed var(--border); padding-bottom: 24px; }
 .projects__grid { width: 100%; display: grid; grid-template-columns: 1fr 1fr; row-gap: 30px; }   /* Figma: 30px between the two rows */
@@ -127,13 +122,12 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 
 @media (max-width: 800px) {
   .projects__grid { grid-template-columns: 1fr; }
-  .projects__header--work { gap: 24px; justify-content: space-between; }
   .hero { height: 620px; }
 }
 
 /* Figma spacing: gap above "About my process" and trailing space below it */
-#about { margin-top: 39px; }
-.column { padding-bottom: 253px; }
+#about { margin-top: 42px; }
+.column { padding-bottom: 251px; }
 
 /* ---- Highlighter marker ---- */
 .hand--right { isolation: isolate; }
