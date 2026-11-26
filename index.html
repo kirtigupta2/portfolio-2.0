@@ -35,8 +35,7 @@
       <div class="projects__header projects__header--work">
         <h2>Featured Projects</h2>
         <div class="header-icon" aria-hidden="true">
-          <img id="box-a" src="assets/box-0.png" alt="">
-          <img id="box-b" alt="">
+          <canvas id="box-canvas" width="300" height="252"></canvas>
         </div>
       </div>
       <div class="projects__body">
@@ -168,33 +167,50 @@
     const tpl = document.getElementById('card');
     const grid = document.getElementById('work-grid');
     // Header box: shows the folder of the hovered/focused card "coming out" of the box (box-0 = nothing hovered).
-    // Two stacked layers: the visible one stays fully opaque while the next fades in over it, then they swap roles.
-    // Changes that arrive mid-fade are queued (latest wins), so the box never pops or thins out.
+    // One canvas blends all four box images by weight. Weights glide toward the hovered image and always sum to 1,
+    // drawn additively ("lighter"), so every frame is a true mix of the images: no layer is ever added or removed,
+    // nothing pops, and moving to another card mid-glide just changes the target smoothly.
     const BOX_SRC = [0, 1, 2, 3].map(n => 'assets/box-' + n + '.png');
-    BOX_SRC.forEach(s => { new Image().src = s; });   // preload
-    const FADE_MS = 280;
-    let under = document.getElementById('box-a'), over = document.getElementById('box-b');
-    under.style.zIndex = 1; over.style.zIndex = 2; over.style.opacity = 0;
-    let shown = 0, wanted = 0, busy = false;
-    function showBox(n) { wanted = n; if (!busy) stepBox(); }
-    function stepBox() {
-      if (wanted === shown) return;
-      busy = true;
-      const n = wanted;
-      over.style.transition = 'none'; over.style.opacity = 0;
-      over.src = BOX_SRC[n];
-      const go = () => {
-        void over.offsetWidth;
-        over.style.transition = 'opacity ' + FADE_MS + 'ms ease';
-        over.style.opacity = 1;
-        setTimeout(() => {                     // fade done: swap roles, reset the new top layer instantly
-          const old = under; under = over; over = old;
-          under.style.zIndex = 1; over.style.zIndex = 2;
-          over.style.transition = 'none'; over.style.opacity = 0;
-          shown = n; busy = false; stepBox();
-        }, FADE_MS + 20);
-      };
-      over.decode ? over.decode().then(go, go) : go();
+    const boxCanvas = document.getElementById('box-canvas');
+    const bctx = boxCanvas.getContext('2d');
+    bctx.imageSmoothingQuality = 'high';
+    const boxImgs = BOX_SRC.map(s => { const im = new Image(); im.onload = () => drawBox(); im.src = s; return im; });
+    const OMEGA = 17;                                 // spring stiffness: higher = faster (about 0.35s to settle)
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let weights = [1, 0, 0, 0], vel = [0, 0, 0, 0], goal = 0, raf = 0, last = 0;
+    function drawBox() {
+      bctx.globalCompositeOperation = 'source-over';
+      bctx.clearRect(0, 0, boxCanvas.width, boxCanvas.height);
+      bctx.globalCompositeOperation = 'lighter';
+      boxImgs.forEach((im, i) => {
+        if (weights[i] > 0.001 && im.complete && im.naturalWidth) {
+          bctx.globalAlpha = Math.min(1, weights[i]);
+          bctx.drawImage(im, 0, 0, boxCanvas.width, boxCanvas.height);
+        }
+      });
+      bctx.globalAlpha = 1;
+    }
+    function tickBox(now) {
+      // Critically damped spring per weight: eases in and out, keeps its momentum if the target changes mid-move,
+      // and (being linear) keeps the weights summing to 1.
+      let remaining = Math.min(0.05, (now - last) / 1000 || 0.016); last = now;
+      while (remaining > 0) {
+        const h = Math.min(0.004, remaining); remaining -= h;
+        for (let i = 0; i < 4; i++) {
+          const g = i === goal ? 1 : 0;
+          vel[i] += (OMEGA * OMEGA * (g - weights[i]) - 2 * OMEGA * vel[i]) * h;
+          weights[i] += vel[i] * h;
+        }
+      }
+      const settled = weights.every((w, i) => Math.abs((i === goal ? 1 : 0) - w) < 0.003 && Math.abs(vel[i]) < 0.03);
+      if (settled) { weights = weights.map((_, i) => (i === goal ? 1 : 0)); vel = [0, 0, 0, 0]; }
+      drawBox();
+      raf = settled ? 0 : requestAnimationFrame(tickBox);
+    }
+    function showBox(n) {
+      goal = n;
+      if (reduceMotion) { weights = weights.map((_, i) => (i === n ? 1 : 0)); vel = [0, 0, 0, 0]; drawBox(); return; }
+      if (!raf) { last = performance.now(); raf = requestAnimationFrame(tickBox); }
     }
     grid.addEventListener('mouseleave', () => showBox(0));
     grid.addEventListener('focusout', () => showBox(0));
