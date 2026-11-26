@@ -156,9 +156,12 @@
     const DESC = 'Three brand specific metrics help a solo operator gauge demand for customization and see how many complete bundles are ready to ship.';
     const TAGS = ['Data Visualization', 'Dashboard Design', 'E- commerce'];
     const PROJECTS = [
-      { name: 'Svaroots',  image: 'assets/project-svaroots.png',  height: 377, status: 'Live', tab: 'assets/svaroots-tab.png' },  // tab: red card that rises on hover
-      { name: 'Vitta',     image: 'assets/project-vitta.png',     height: 378, status: 'Live' },
-      { name: 'Breezy',    image: 'assets/project-breezy.png',    height: 416, status: 'Live' },
+      { name: 'Svaroots',  image: 'assets/project-svaroots.png',  height: 377, status: 'Live', tab: 'assets/svaroots-tab.png',  // tab: red card that rises on hover
+        href: 'https://www.behance.net/gallery/258422673/Svaroots-Operations-Dashboard-for-Modular-Sneakers' },
+      { name: 'Vitta',     image: 'assets/project-vitta.png',     height: 378, status: 'Live',
+        href: 'https://www.behance.net/gallery/256848709/Beyond-Banking-An-Agentic-AI-Experience' },
+      { name: 'Breezy',    image: 'assets/project-breezy.png',    height: 416, status: 'Live',
+        href: 'https://www.behance.net/gallery/256071703/Breezy-Rethinking-breathing-therapy-through-play' },
       { name: 'PromptKit', image: 'assets/project-promptkit.png', height: 416, status: 'Coming Soon' },
     ];
     const tpl = document.getElementById('card');
@@ -166,7 +169,13 @@
     PROJECTS.forEach(p => {
       const el = tpl.content.cloneNode(true);
       const card = el.querySelector('.card');
-      card.tabIndex = 0;
+      if (p.href) {
+        // Whole card is clickable (stretched link); footer icons stay above it
+        const a = document.createElement('a');
+        a.className = 'card__link'; a.href = p.href; a.target = '_blank'; a.rel = 'noopener noreferrer';
+        a.setAttribute('aria-label', 'Open ' + p.name + ' on Behance (opens in a new tab)');
+        card.append(a);
+      }
       const img = el.querySelector('.card__image'); img.src = p.image; img.alt = p.name + ' project preview'; img.style.height = p.height + 'px';
       if (p.tab) {
         // Only the red tab moves: it rises ~10px over the (static) folder image and shows live text
