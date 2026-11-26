@@ -1,14 +1,40 @@
 :root {
   --col: 1280px;
-  --border: #2c2c2c;
+  /* Dark theme (Figma "Home - Dark background") */
+  --bg: #000;
   --text: #f2f2f2;
+  --note: #ececec;            /* handwritten notes */
+  --card-name: #f5f5f5;
+  --nav: #9a9a9a;
+  --nav-hover: #fff;
+  --nav-active: #fff;
+  --border: #2c2c2c;
   --muted: #8f8f8f;
   --body: #a3a3a3;
   --tag-bg: #1c1c1c;
+  --ellipse-top: 368.6px;     /* Figma ellipse: 408px (dark) */
+  color-scheme: dark;
+}
+/* Bright theme (Figma "Home - Bright Background") */
+html[data-theme="light"] {
+  --bg: #fff;
+  --text: #000;
+  --note: #000;
+  --card-name: #000;
+  --nav: #616060;
+  --nav-hover: #000;
+  --nav-active: #d20328;
+  --ellipse-top: 358.6px;     /* Figma ellipse: 398px (bright) */
+  color-scheme: light;
+}
+/* short colour fade while switching themes (class is added by the toggle for ~0.5s) */
+html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after {
+  transition: background-color .35s ease, color .35s ease, border-color .35s ease, fill .35s ease !important;
 }
 * { box-sizing: border-box; margin: 0; }
+html { background: var(--bg); }
 body {
-  background: #000;
+  background: var(--bg);
   color: var(--text);
   font-family: Inter, system-ui, sans-serif;
   display: flex;
@@ -19,6 +45,7 @@ html { scroll-behavior: smooth; }
 section[id] { scroll-margin-top: 80px; }
 a { color: inherit; text-decoration: none; }
 h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
+.hero__heading { position: static; }   /* one <h1>; its two words are positioned against the hero */
 
 .column {
   position: relative;
@@ -33,7 +60,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 /* Nav (full-bleed bar) */
 .nav {
   align-self: stretch; position: sticky; top: 0; z-index: 10;
-  background: #000;
+  background: var(--bg);
   border-bottom: 1px dashed var(--border);
 }
 .nav__inner {
@@ -42,19 +69,20 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
   border-left: 1px dashed var(--border); border-right: 1px dashed var(--border);
 }
 .nav__links { display: flex; align-items: center; gap: 26px; }
-.nav__item { font-size: 18px; font-weight: 500; color: #9a9a9a; display: flex; align-items: center; gap: 5px; }
-.nav__item:hover { color: #fff; }
+.nav__item { font-size: 18px; font-weight: 500; color: var(--nav); display: flex; align-items: center; gap: 5px; }
+.nav__item:hover { color: var(--nav-hover); }
 .nav__item--tab { position: relative; }
-.nav__item--active { color: #fff; font-weight: 600; }
+.nav__item--active, .nav__item--active:hover { color: var(--nav-active); font-weight: 600; }
 .nav__underline { position: absolute; left: 0; bottom: -4px; width: 100%; height: 1px; display: none; }
 .nav__item--active .nav__underline { display: block; }
-.nav__theme { background: none; border: 0; padding: 0; cursor: pointer; display: flex; }
+.nav__theme { background: none; border: 0; padding: 0; cursor: pointer; display: flex; border-radius: 4px; }
+.nav__theme:focus-visible { outline: 1px dashed var(--nav); outline-offset: 4px; }
 
 /* Hero: 571px tall, coordinates from Figma column */
 /* First fold: the hero fills the window below the nav, so nothing of "Featured Projects" shows until you scroll.
    (623px = the 571px of hero art + the 52px gap Figma leaves before the next section.) */
 .hero { position: relative; min-height: max(623px, calc(100vh - 80px)); min-height: max(623px, calc(100svh - 80px)); overflow: hidden; }
-.hero__ellipse { position: absolute; left: 473.9px; top: 348.6px; transform: rotate(-29.3deg); }
+.hero__ellipse { position: absolute; left: 473.9px; top: var(--ellipse-top); transition: top .5s ease; transform: rotate(-29.3deg); }
 .hero__title { position: absolute; font-size: 67.112px; line-height: normal; color: var(--text); white-space: nowrap; }
 .hero__title--a { left: 185.17px; top: 95.51px; }
 .hero__title--b { left: 700.04px; top: 200.37px; }
@@ -71,12 +99,12 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .hero__arrow--b img { left: -0.72%; top: -1.78%; width: 101.44%; height: 102.97%; }
 .hand {
   position: absolute; font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive;
-  font-size: 16.778px; line-height: 24.118px; color: #ececec;
+  font-size: 16.778px; line-height: 24.118px; color: var(--note);
 }
 .hand--left { left: 383px; top: 339.84px; white-space: nowrap; transform: translateX(-100%); text-align: right; }
 /* second line of the note + Accenture logo (Figma: its own group, 8.389px gap) */
 .hand-group { position: absolute; left: 196px; top: 365px; display: flex; align-items: center; gap: 8.389px; white-space: nowrap; }
-.hand-group .hand-text { font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 16.778px; line-height: 24.118px; color: #ececec; }
+.hand-group .hand-text { font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 16.778px; line-height: 24.118px; color: var(--note); }
 .hand-group img { width: 17.827px; height: 17.827px; flex-shrink: 0; object-fit: cover; }
 .hand--right { left: 668.58px; top: 441.55px; width: 449.86px; font-size: 20.973px; line-height: 29.362px; }
 
@@ -98,7 +126,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .about-board__card img { width: 1091px; max-width: 100%; height: 771.6px; object-fit: cover; display: block; }
 
 .card {
-  display: flex; flex-direction: column; gap: 12px; padding: 18px; min-width: 0;
+  display: flex; flex-direction: column; gap: 16px; padding: 18px; min-width: 0;
   border-right: 1px dashed var(--border); border-bottom: 1px dashed var(--border);
 }
 .card__media { position: relative; width: 566px; max-width: 100%; align-self: center; }
@@ -116,15 +144,15 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .card:hover .card__tab-inner, .card:has(.card__link:focus-visible) .card__tab-inner { transform: translateY(-10px); }
 .card:hover .card__tab-inner span, .card:has(.card__link:focus-visible) .card__tab-inner span { opacity: 1; transition: opacity .2s ease .1s; }
 @media (prefers-reduced-motion: reduce) { .card__tab-inner, .card__tab-inner span { transition: none !important; } }
-.card__title-row { display: flex; justify-content: space-between; align-items: flex-start; }
-.card__titles { display: flex; flex-direction: column; gap: 4px; }
-.card__name { font-family: Impact, 'Anton', sans-serif; font-weight: 400; font-size: 20px; color: #f5f5f5; }
+.card__titles { display: flex; flex-direction: column; gap: 4px; width: 100%; }
+.card__namerow { display: flex; justify-content: space-between; align-items: center; }
+.card__name { font-family: Impact, 'Anton', sans-serif; font-weight: 400; font-size: 20px; color: var(--card-name); }
 .card__tagline { font-size: 16px; font-weight: 500; color: #b6b6b6; }
-.card__live { display: flex; align-items: center; gap: 6px; padding-top: 8px; font-size: 14px; font-weight: 500; color: var(--muted); }
+.card__live { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; line-height: normal; color: var(--muted); }
 .card__desc { font-size: 16px; font-weight: 500; line-height: 20px; color: var(--body); }
-.card__footer { display: flex; align-items: center; justify-content: space-between; padding-top: 4px; }
+.card__footer { display: flex; align-items: center; justify-content: space-between; }
 .card__tags { list-style: none; padding: 0; display: flex; gap: 8px; }
-.card__tags li { background: var(--tag-bg); color: #f0f0f0; font-size: 14px; font-weight: 500; padding: 4px 8px; border-radius: 6px; }
+.card__tags li { background: var(--tag-bg); color: #f0f0f0; font-size: 14px; font-weight: 500; padding: 6px 8px; border-radius: 6px; }
 .card__links { display: flex; gap: 16px; align-items: center; }
 .card__links a { display: flex; position: relative; z-index: 2; }
 
