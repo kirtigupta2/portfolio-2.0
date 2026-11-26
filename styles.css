@@ -1,5 +1,5 @@
 :root {
-  --col: 1204px;
+  --col: 1280px;
   --border: #2c2c2c;
   --text: #f2f2f2;
   --muted: #8f8f8f;
@@ -42,7 +42,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
   border-left: 1px dashed var(--border); border-right: 1px dashed var(--border);
 }
 .nav__links { display: flex; align-items: center; gap: 26px; }
-.nav__item { font-size: 15px; font-weight: 500; color: #9a9a9a; display: flex; align-items: center; gap: 5px; }
+.nav__item { font-size: 18px; font-weight: 500; color: #9a9a9a; display: flex; align-items: center; gap: 5px; }
 .nav__item:hover { color: #fff; }
 .nav__item--tab { position: relative; }
 .nav__item--active { color: #fff; font-weight: 600; }
@@ -52,44 +52,46 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 
 /* Hero: 571px tall, coordinates from Figma column */
 .hero { position: relative; height: 571px; overflow: hidden; }
-.hero__ellipse { position: absolute; left: 464px; top: 349px; transform: rotate(-29.3deg); }
-.hero__title { position: absolute; font-size: 64px; line-height: normal; color: var(--text); white-space: nowrap; }
-.hero__title--a { left: 206px; top: 81px; }
-.hero__title--b { left: 697px; top: 178px; }
-.hero__photo { position: absolute; width: 344px; height: 396px; left: calc(50% - 24px - 172px); top: 50px; object-fit: cover; }
+.hero__ellipse { position: absolute; left: 473.9px; top: 348.6px; transform: rotate(-29.3deg); }
+.hero__title { position: absolute; font-size: 67.112px; line-height: normal; color: var(--text); white-space: nowrap; }
+.hero__title--a { left: 185.17px; top: 95.51px; }
+.hero__title--b { left: 700.04px; top: 200.37px; }
+.hero__photo { position: absolute; width: 360.822px; height: 415.146px; left: calc(50% - 64.75px - 180.411px); top: 63px; object-fit: cover; }
 /* Arrows: outer box from Figma insets; inner box is the rotated vector (Figma's rotation math, precomputed) */
 .hero__arrow { position: absolute; }
 .hero__arrow-inner { position: absolute; left: 50%; top: 50%; }
 .hero__arrow-inner img { position: absolute; max-width: none; display: block; }
-.hero__arrow--a { left: 349.3px; top: 251px; width: 82.1px; height: 55.7px; }
-.hero__arrow--a .hero__arrow-inner { width: 72.5px; height: 37.6px; transform: translate(-50%, -50%) rotate(163.76deg) scaleX(-1) skewX(-3.03deg); }
-.hero__arrow--a img { left: -0.69%; top: -1.85%; width: 101.38%; height: 103.17%; }
-.hero__arrow--b { left: 707px; top: 325.8px; width: 70.8px; height: 76.4px; }
-.hero__arrow--b .hero__arrow-inner { width: 68.6px; height: 40px; transform: translate(-50%, -50%) rotate(-120.38deg) skewX(-4.75deg); }
-.hero__arrow--b img { left: -0.73%; top: -1.84%; width: 101.46%; height: 103.09%; }
+.hero__arrow--a { left: 334.4px; top: 273.6px; width: 91.5px; height: 58.6px; }
+.hero__arrow--a .hero__arrow-inner { width: 80.5px; height: 39.8px; transform: translate(-50%, -50%) rotate(164.68deg) scaleX(-1) skewX(-5.07deg); }
+.hero__arrow--a img { left: -0.65%; top: -1.8%; width: 101.3%; height: 103.12%; }
+.hero__arrow--b { left: 699.5px; top: 352.3px; width: 79px; height: 80.2px; }
+.hero__arrow--b .hero__arrow-inner { width: 73.2px; height: 44.1px; transform: translate(-50%, -50%) rotate(-121.93deg) skewX(-7.64deg); }
+.hero__arrow--b img { left: -0.72%; top: -1.78%; width: 101.44%; height: 102.97%; }
 .hand {
   position: absolute; font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive;
-  font-size: 16px; line-height: 23px; color: #ececec;
+  font-size: 16.778px; line-height: 24.118px; color: #ececec;
 }
-.hand--left { left: 382px; top: 314px; white-space: nowrap; transform: translateX(-100%); text-align: right; }
-/* second line of the note + Accenture logo (Figma: its own group, 8px gap) */
-.hand-group { position: absolute; left: 216px; top: 338px; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
-.hand-group .hand-text { font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 16px; line-height: 23px; color: #ececec; }
-.hand-group img { width: 17px; height: 17px; flex-shrink: 0; object-fit: cover; }
-.hand--right { left: 675px; top: 411px; width: 429px; font-size: 20px; line-height: 28px; }
+.hand--left { left: 383px; top: 339.84px; white-space: nowrap; transform: translateX(-100%); text-align: right; }
+/* second line of the note + Accenture logo (Figma: its own group, 8.389px gap) */
+.hand-group { position: absolute; left: 196px; top: 365px; display: flex; align-items: center; gap: 8.389px; white-space: nowrap; }
+.hand-group .hand-text { font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 16.778px; line-height: 24.118px; color: #ececec; }
+.hand-group img { width: 17.827px; height: 17.827px; flex-shrink: 0; object-fit: cover; }
+.hand--right { left: 668.58px; top: 441.55px; width: 449.86px; font-size: 20.973px; line-height: 29.362px; }
 
 /* Projects */
 .projects { border-top: 1px dashed var(--border); padding: 16px 0 24px; display: flex; flex-direction: column; gap: 16px; }
 .projects__header { padding: 0 28px 0 20px; }
 .projects__header h2 { font-size: 28px; white-space: nowrap; flex-shrink: 0; }
-.projects--work { padding-bottom: 0; margin-top: 32px; }   /* Figma: section starts at 683px */
-.projects__header--work { display: flex; align-items: center; gap: 859px; }
+.projects--work { padding-bottom: 0; margin-top: 52px; }   /* Figma: section starts at 703px */
+/* The Figma frame no longer has the picture here; the hover box (built earlier) stays at the right edge of the header */
+.projects__header--work { display: flex; align-items: center; justify-content: space-between; }
 .header-icon { position: relative; width: 100px; height: 84px; flex-shrink: 0; pointer-events: none; }
 /* Box: a canvas (drawn at 3x) that JS blends between the four box images */
 .header-icon canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .card:focus-visible { outline: 1px dashed #8f8f8f; outline-offset: -6px; }
 .projects__body { border-top: 1px dashed var(--border); padding-bottom: 24px; }
-.projects__grid { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
+.projects__grid { width: 100%; display: grid; grid-template-columns: 1fr 1fr; row-gap: 30px; }   /* Figma: 30px between the two rows */
+.projects__grid .card:nth-child(n+3) { border-top: 1px dashed var(--border); }                       /* second row cards have a top border */
 /* About: just the notebook image in a bordered card (no divider above, no text) */
 .about-board { display: flex; }
 .about-board__card { flex: 1; min-width: 0; display: flex; justify-content: center; padding: 16px; border-right: 1px dashed var(--border); border-bottom: 1px dashed var(--border); }
