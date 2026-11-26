@@ -199,7 +199,7 @@
         await type(a, 'Product'); a.classList.remove('typing');
         await sleep(160);
         await type(b, 'Designer');
-        setTimeout(() => b.classList.remove('typing'), 1400);   // caret blinks a moment, then goes
+        setTimeout(() => b.classList.remove('typing'), 2250);   // caret blinks 3 times (3 x 0.75s), then goes
       }
       addEventListener('highlight-done', run, { once: true });
       setTimeout(run, 12000);                          // safety net if the highlighter never reports
