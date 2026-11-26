@@ -84,6 +84,18 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .nav__item--active, .nav__item--active:hover { color: var(--nav-active); font-weight: 600; }
 .nav__item--active .nav__theme { background: none; border: 0; padding: 0; cursor: pointer; display: flex; border-radius: 4px; }
 .nav__theme:disabled { background: none; border: 0; color: inherit; opacity: 1; }
+/* Very subtle pop-in for the portrait: a small rise + scale + fade on load */
+.hero__photo { animation: photo-pop .9s cubic-bezier(.2,.8,.2,1) .15s both; }
+@keyframes photo-pop { from { opacity: 0; transform: translateY(14px) scale(.965); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .hero__photo { animation: none; } }
+
+/* "Work in progress" bar on the blurred PromptKit image */
+.card__wip { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); width: min(250px, 64%); text-align: center; pointer-events: none; z-index: 2; }
+.card__wip span { display: block; margin-bottom: 12px; font: 500 16px/20px Inter, system-ui, sans-serif; color: #1c1c1c; }   /* same font, weight and size as the project descriptions */
+.card__wip i { display: block; height: 4px; background: rgba(0,0,0,.16); }
+.card__wip i::before { content: ""; display: block; width: 60%; height: 100%; background: #C54100; }
+
+.card__links { display: none; }   /* web + GitHub icons hidden on every project for now */
 .nav__theme[hidden] { display: none; }   /* sun icon hidden for now */
 .nav__theme:focus-visible { outline: 1px dashed var(--nav); outline-offset: 4px; }
 
@@ -100,9 +112,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .hero__title { position: absolute; font-size: 67.112px; line-height: normal; color: var(--text); white-space: nowrap; }
 .hero__title--a { left: 185.17px; top: 95.51px; }
 .hero__title--b { left: 700.04px; top: 200.37px; }
-.hero__photo { position: absolute; width: 360.822px; height: 415.146px; left: calc(50% - 64.75px - 180.411px); top: 63px; object-fit: cover;
-  /* make the cutout pop: soft red rim glow + a touch more contrast and colour */
-  filter: drop-shadow(0 0 2px rgba(255,255,255,.28)) drop-shadow(0 0 26px rgba(210,3,40,.38)) drop-shadow(0 14px 22px rgba(0,0,0,.55)) saturate(1.1) contrast(1.05); }
+.hero__photo { position: absolute; width: 360.822px; height: 415.146px; left: calc(50% - 64.75px - 180.411px); top: 63px; object-fit: cover; }   /* flat 2D cutout: no glow or shadow */
 /* Arrows: outer box from Figma insets; inner box is the rotated vector (Figma's rotation math, precomputed) */
 .hero__arrow { position: absolute; }
 .hero__arrow-inner { position: absolute; left: 50%; top: 50%; }
