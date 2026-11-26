@@ -95,7 +95,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .card__wip i { display: block; height: 4px; background: rgba(0,0,0,.16); }
 .card__wip i::before { content: ""; display: block; width: 60%; height: 100%; background: #C54100; }
 
-.card__links { display: none; }   /* web + GitHub icons hidden on every project for now */
+.card__links { display: none !important; }   /* web + GitHub icons hidden on every project for now */
 .nav__theme[hidden] { display: none; }   /* sun icon hidden for now */
 .nav__theme:focus-visible { outline: 1px dashed var(--nav); outline-offset: 4px; }
 
