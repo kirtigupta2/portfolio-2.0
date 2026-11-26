@@ -31,15 +31,9 @@
       <p class="hand hand--right">I connect what <span class="mark">people need with what a business is striving to achieve, then ideate, sketch and build ideas</span> that bring the two together.</p>
     </section>
 
-    <section class="projects projects--work" id="work">
-      <div class="projects__header projects__header--work">
-        <h2>Selected Projects</h2>
-        <div class="header-icon"><img src="assets/header-icon.png" alt=""></div>
-      </div>
-      <div class="projects__body">
-        <img class="featured" src="assets/featured-project.png" alt="Svaroots: operations dashboard for a modular sneaker brand">
-        <div class="projects__grid" id="work-grid"></div>
-      </div>
+    <section class="projects" id="work">
+      <div class="projects__header"><h2>Selected Projects</h2></div>
+      <div class="projects__grid" data-images="assets/project-1.png,assets/image39.png"></div>
     </section>
 
     <section class="projects" id="about">
@@ -55,14 +49,14 @@
       <img class="card__image" alt="">
       <div class="card__title-row">
         <div class="card__titles">
-          <p class="card__name"></p>
-          <p class="card__tagline"></p>
+          <p class="card__name">Timmo</p>
+          <p class="card__tagline">Timmer with leaderboard and analytics.</p>
         </div>
-        <div class="card__live"><img class="card__dot" width="6" height="6" alt=""><span class="card__status"></span></div>
+        <div class="card__live"><img src="assets/dot.svg" width="6" height="6" alt=""><span>Live</span></div>
       </div>
-      <p class="card__desc"></p>
+      <p class="card__desc">A clean productivity app for tracking time and staying consistent. Focus, manage tasks, and visualize your progress with insightful stats.</p>
       <div class="card__footer">
-        <ul class="card__tags"></ul>
+        <ul class="card__tags"><li>React</li><li>Tailwind CSS</li><li>Shadcn UI</li></ul>
         <div class="card__links">
           <a href="#" aria-label="Live site"><img src="assets/web.svg" width="20" height="20" alt=""></a>
           <a href="#" aria-label="GitHub repository"><img src="assets/github.svg" width="20" height="20" alt=""></a>
@@ -153,35 +147,14 @@
     addEventListener('scroll', () => { if (scrollY < 10) setActive('#home'); }, { passive: true });
     setActive(tabs.some(t => t.getAttribute('href') === location.hash) ? location.hash : '#home');
 
-    // Project cards (content from the Figma file)
-    const PROJECTS = [
-      { name: 'Svaroots', font: 'impact', gap: 4, tagline: 'Operations dashboard for a modular sneaker brand', taglineColor: '#b6b6b6',
-        status: 'Live', image: 'assets/project-1.png',
-        desc: 'Three brand specific metrics help a solo operator gauge demand for customization and see how many complete bundles are ready to ship.',
-        tags: ['Data Visualization', 'Dashboard Design', 'E- commerce'] },
-      { name: 'Vitta', font: 'impact', tagline: 'Timmer with leaderboard and analytics.', status: 'Live', image: 'assets/image39.png',
-        desc: 'A clean productivity app for tracking time and staying consistent. Focus, manage tasks, and visualize your progress with insightful stats.',
-        tags: ['React', 'Tailwind CSS', 'Shadcn UI'] },
-      { name: 'Breezy', font: 'inter', tagline: 'Timmer with leaderboard and analytics.', status: 'Live', image: 'assets/image39.png',
-        desc: 'A clean productivity app for tracking time and staying consistent. Focus, manage tasks, and visualize your progress with insightful stats.',
-        tags: ['React', 'Tailwind CSS', 'Shadcn UI'] },
-      { name: 'Timmo', font: 'inter', tagline: 'Timmer with leaderboard and analytics.', status: 'Coming Soon', image: 'assets/image39.png',
-        desc: 'A clean productivity app for tracking time and staying consistent. Focus, manage tasks, and visualize your progress with insightful stats.',
-        tags: ['React', 'Tailwind CSS', 'Shadcn UI'] },
-    ];
     const tpl = document.getElementById('card');
-    const grid = document.getElementById('work-grid');
-    PROJECTS.forEach(p => {
-      const el = tpl.content.cloneNode(true);
-      const img = el.querySelector('.card__image'); img.src = p.image; img.alt = p.name + ' project preview';
-      const name = el.querySelector('.card__name'); name.textContent = p.name; name.classList.add('card__name--' + p.font);
-      if (p.gap) el.querySelector('.card__titles').style.gap = p.gap + 'px';
-      const tag = el.querySelector('.card__tagline'); tag.textContent = p.tagline; if (p.taglineColor) tag.style.color = p.taglineColor;
-      el.querySelector('.card__dot').src = p.status === 'Live' ? 'assets/dot.svg' : 'assets/dot-soon.svg';
-      el.querySelector('.card__status').textContent = p.status;
-      el.querySelector('.card__desc').textContent = p.desc;
-      p.tags.forEach(t => { const li = document.createElement('li'); li.textContent = t; el.querySelector('.card__tags').append(li); });
-      grid.append(el);
+    document.querySelectorAll('.projects__grid[data-images]').forEach(grid => {
+      const imgs = grid.dataset.images.split(',');
+      for (let i = 0; i < 4; i++) {
+        const el = tpl.content.cloneNode(true);
+        el.querySelector('.card__image').src = imgs[Math.min(i, imgs.length - 1)];
+        grid.appendChild(el);
+      }
     });
   </script>
 </body>

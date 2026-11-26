@@ -82,46 +82,37 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .projects { border-top: 1px dashed var(--border); padding: 16px 0 24px; display: flex; flex-direction: column; gap: 16px; }
 .projects__header { padding: 0 28px 0 20px; }
 .projects__header h2 { font-size: 28px; }
-.projects--work { padding-bottom: 0; }
-.projects__header--work { display: flex; align-items: center; gap: 812px; }
-.header-icon { position: relative; width: 103px; height: 87px; overflow: hidden; flex-shrink: 0; pointer-events: none; }
-.header-icon img { position: absolute; max-width: none; width: 169.98%; height: 160.99%; left: -36.03%; top: -19.78%; }
-.projects__body { border-top: 1px dashed var(--border); padding-bottom: 24px; display: flex; flex-direction: column; align-items: center; }
-.featured { width: 957px; max-width: 100%; height: 638px; object-fit: cover; display: block; }
-.projects__grid { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
+.projects__grid { border-top: 1px dashed var(--border); padding: 0 0 24px; display: grid; grid-template-columns: 1fr 1fr; }
 /* About: just the notebook image in a bordered card (no divider above, no text) */
 .about-board { display: flex; }
 .about-board__card { flex: 1; min-width: 0; display: flex; justify-content: center; padding: 16px; border-right: 1px dashed var(--border); border-bottom: 1px dashed var(--border); }
 .about-board__card img { width: 1091px; max-width: 100%; height: 771.6px; object-fit: cover; display: block; }
 
 .card {
-  display: flex; flex-direction: column; gap: 12px; padding: 18px; min-width: 0;
+  display: flex; flex-direction: column; gap: 12px; padding: 16px; min-width: 0;
   border-right: 1px dashed var(--border); border-bottom: 1px dashed var(--border);
 }
 .card__image { width: 517px; max-width: 100%; height: 417px; object-fit: cover; align-self: center; }
 .card__title-row { display: flex; justify-content: space-between; align-items: flex-start; }
 .card__titles { display: flex; flex-direction: column; gap: 2px; }
-.card__name { font-size: 20px; color: #f5f5f5; }
-.card__name--inter { font-weight: 700; }
-.card__name--impact { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
-.card__tagline { font-size: 16px; font-weight: 500; color: var(--muted); }
+.card__name { font-size: 20px; font-weight: 700; color: #f5f5f5; }
+.card__tagline { font-size: 13px; font-weight: 500; color: var(--muted); }
 .card__live { display: flex; align-items: center; gap: 6px; padding-top: 8px; font-size: 14px; font-weight: 500; color: var(--muted); }
-.card__desc { font-size: 16px; font-weight: 500; line-height: 20px; color: var(--body); }
+.card__desc { font-size: 14.5px; font-weight: 500; line-height: 20px; color: var(--body); }
 .card__footer { display: flex; align-items: center; justify-content: space-between; padding-top: 4px; }
 .card__tags { list-style: none; padding: 0; display: flex; gap: 8px; }
-.card__tags li { background: var(--tag-bg); color: #f0f0f0; font-size: 14px; font-weight: 500; padding: 4px 8px; border-radius: 6px; }
+.card__tags li { background: var(--tag-bg); color: #f0f0f0; font-size: 13px; font-weight: 500; padding: 4px 8px; border-radius: 6px; }
 .card__links { display: flex; gap: 16px; align-items: center; }
 .card__links a { display: flex; }
 
 @media (max-width: 800px) {
   .projects__grid { grid-template-columns: 1fr; }
-  .projects__header--work { gap: 24px; justify-content: space-between; }
   .hero { height: 620px; }
 }
 
 /* Figma spacing: gap above "About my process" and trailing space below it */
 #about { margin-top: 62px; }
-.column { padding-bottom: 320px; }
+.column { padding-bottom: 270px; }
 
 /* ---- Highlighter marker ---- */
 .hand--right { isolation: isolate; }
