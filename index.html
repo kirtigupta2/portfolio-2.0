@@ -91,26 +91,6 @@
       const MIN_MS = 450, GAP_MS = 120;   // min stroke time / pause when "moving" to the next line
       const EASE = 'cubic-bezier(.5,.05,.3,1)';
 
-      // Marker-on-paper sound: one play per stroke, started with the stroke (browsers may block sound before the first click/tap/key press)
-      const sfx = new Audio('assets/highlighter.mp3'); sfx.preload = 'auto'; sfx.volume = 0.7;
-      let soundBlocked = false, replayed = false;
-      const strokes = [];                      // { anim, delay, at } for each stroke, so the highlight can be replayed with sound
-      function playSfx() {
-        try {
-          const a = sfx.cloneNode(); a.volume = sfx.volume; const p = a.play();
-          if (p && p.catch) p.catch(() => { if (!soundBlocked) { soundBlocked = true; armReplay(); } });
-        } catch (e) {}
-      }
-      // Browsers refuse sound before the visitor has interacted. If that happened, the first click / tap / key press
-      // replays the highlight (with sound) as long as the heading is still on screen.
-      function armReplay() {
-        const go = () => {
-          ['pointerdown', 'keydown', 'touchstart'].forEach(ev => removeEventListener(ev, go, true));
-          if (replayed || scrollY > 400) return; replayed = true;
-          strokes.forEach(s => { s.anim.cancel(); s.anim.effect.updateTiming({ delay: s.at + 150 }); s.anim.play(); setTimeout(playSfx, s.at + 150); });
-        };
-        ['pointerdown', 'keydown', 'touchstart'].forEach(ev => addEventListener(ev, go, true));
-      }
       let layer = host.querySelector('.marker-layer');
       let animated = false;
 
@@ -140,12 +120,10 @@
           if (reduce || animated) {
             wrap.style.clipPath = 'inset(0)';
           } else {
-            const anim = wrap.animate(
+            wrap.animate(
               [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)' }],
               { duration: dur, delay: t, easing: EASE, fill: 'both' }
             );
-            strokes.push({ anim, at: t - START_DELAY });
-            setTimeout(playSfx, t);
             t += dur + GAP_MS;
           }
         });
