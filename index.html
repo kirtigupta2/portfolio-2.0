@@ -34,7 +34,12 @@
     <section class="projects projects--work" id="work">
       <div class="projects__header projects__header--work">
         <h2>Featured Projects</h2>
-        <img class="header-icon" src="assets/header-icon.png" width="100" height="84" alt="">
+        <div class="header-icon" aria-hidden="true">
+          <img class="is-active" src="assets/box-0.png" alt="">
+          <img src="assets/box-1.png" alt="">
+          <img src="assets/box-2.png" alt="">
+          <img src="assets/box-3.png" alt="">
+        </div>
       </div>
       <div class="projects__body">
         <div class="projects__grid" id="work-grid"></div>
@@ -157,15 +162,24 @@
     const DESC = 'Three brand specific metrics help a solo operator gauge demand for customization and see how many complete bundles are ready to ship.';
     const TAGS = ['Data Visualization', 'Dashboard Design', 'E- commerce'];
     const PROJECTS = [
-      { name: 'Svaroots',  image: 'assets/project-svaroots.png',  height: 377, status: 'Live' },
-      { name: 'Vitta',     image: 'assets/project-vitta.png',     height: 378, status: 'Live' },
-      { name: 'Breezy',    image: 'assets/project-breezy.png',    height: 416, status: 'Live' },
-      { name: 'PromptKit', image: 'assets/project-promptkit.png', height: 416, status: 'Coming Soon' },
+      { name: 'Svaroots',  image: 'assets/project-svaroots.png',  height: 377, status: 'Live', box: 1 },
+      { name: 'Vitta',     image: 'assets/project-vitta.png',     height: 378, status: 'Live', box: 2 },
+      { name: 'Breezy',    image: 'assets/project-breezy.png',    height: 416, status: 'Live', box: 3 },
+      { name: 'PromptKit', image: 'assets/project-promptkit.png', height: 416, status: 'Coming Soon', box: 0 },  // no box image 4 in Figma yet
     ];
     const tpl = document.getElementById('card');
     const grid = document.getElementById('work-grid');
+    // Header box: shows the folder of the hovered/focused card "coming out" of the box (box-0 = nothing hovered)
+    const boxes = [...document.querySelectorAll('.header-icon img')];
+    const showBox = n => boxes.forEach((b, i) => b.classList.toggle('is-active', i === n));
+    grid.addEventListener('mouseleave', () => showBox(0));
+    grid.addEventListener('focusout', () => showBox(0));
     PROJECTS.forEach(p => {
       const el = tpl.content.cloneNode(true);
+      const card = el.querySelector('.card');
+      card.tabIndex = 0;
+      card.addEventListener('mouseenter', () => showBox(p.box));
+      card.addEventListener('focus', () => showBox(p.box));
       const img = el.querySelector('.card__image'); img.src = p.image; img.alt = p.name + ' project preview'; img.style.height = p.height + 'px';
       el.querySelector('.card__name').textContent = p.name;
       el.querySelector('.card__tagline').textContent = TAGLINE;

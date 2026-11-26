@@ -84,7 +84,10 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .projects__header h2 { font-size: 28px; white-space: nowrap; flex-shrink: 0; }
 .projects--work { padding-bottom: 0; margin-top: 32px; }   /* Figma: section starts at 683px */
 .projects__header--work { display: flex; align-items: center; gap: 859px; }
-.header-icon { width: 100px; height: 84px; object-fit: cover; flex-shrink: 0; pointer-events: none; }
+.header-icon { position: relative; width: 100px; height: 84px; flex-shrink: 0; pointer-events: none; }
+.header-icon img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity .22s ease; }
+.header-icon img.is-active { opacity: 1; }
+.card:focus-visible { outline: 1px dashed #8f8f8f; outline-offset: -6px; }
 .projects__body { border-top: 1px dashed var(--border); padding-bottom: 24px; }
 .projects__grid { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
 /* About: just the notebook image in a bordered card (no divider above, no text) */
