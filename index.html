@@ -105,7 +105,7 @@
           const wrap = document.createElement('span');
           wrap.className = 'marker-stroke';
           // slight overshoot past the text and a touch taller than the line, like a real marker pass
-          const padX = 10, padY = 9;
+          const padX = 12, padY = 7;
           Object.assign(wrap.style, {
             left: (r.left - hb.left - padX) + 'px',
             top: (r.top - hb.top - padY + (i % 2 ? 1 : -1)) + 'px',
@@ -113,7 +113,7 @@
             height: (r.height + padY * 2) + 'px',
           });
           wrap.style.setProperty('--tilt', ((i % 2 ? 0.5 : -0.4) + (i * 0.15)) + 'deg');
-          wrap.style.setProperty('--stroke', 'url(assets/stroke-' + (i % 2 ? 2 : 1) + '.png)');
+          wrap.style.setProperty('--stroke', 'url(assets/stroke-' + (i % 2 ? 2 : 1) + '-level.png)');
           layer.append(wrap);
           const dur = Math.max(MIN_MS, r.width / SPEED);
           if (reduce || animated) {
