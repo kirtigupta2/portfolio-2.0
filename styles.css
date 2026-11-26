@@ -91,7 +91,12 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 /* First fold: the hero fills the window below the nav, so nothing of "Featured Projects" shows until you scroll.
    (623px = the 571px of hero art + the 52px gap Figma leaves before the next section.) */
 .hero { position: relative; min-height: max(623px, calc(100vh - 80px)); min-height: max(623px, calc(100svh - 80px)); overflow: hidden; }
-.hero__ellipse { position: absolute; left: 473.9px; top: var(--ellipse-top); transition: top .5s ease; transform: rotate(-29.3deg); }
+@property --g { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+/* The red ring: its gradient is a conic gradient that JS spins one full turn while the text is highlighted */
+.hero__ellipse { position: absolute; left: 473.9px; top: var(--ellipse-top); width: 201px; height: 134px; transform: rotate(-29.3deg); transition: top .5s ease;
+  --g: 0deg;
+  background: conic-gradient(from var(--g) at 50% 50%, #D20328 0deg, #D20328 60deg, rgba(213,3,41,.36) 150deg, rgba(213,3,41,.36) 230deg, #D20328 320deg, #D20328 360deg);
+  -webkit-mask: url(assets/ellipse-mask.svg) 0 0 / 100% 100% no-repeat; mask: url(assets/ellipse-mask.svg) 0 0 / 100% 100% no-repeat; }
 .hero__title { position: absolute; font-size: 67.112px; line-height: normal; color: var(--text); white-space: nowrap; }
 .hero__title--a { left: 185.17px; top: 95.51px; }
 .hero__title--b { left: 700.04px; top: 200.37px; }

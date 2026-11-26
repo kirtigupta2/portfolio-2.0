@@ -28,7 +28,7 @@
   </header>
   <div class="column">
     <section class="hero" id="home">
-      <img class="hero__ellipse" src="assets/ellipse1.svg" width="201" height="134" alt="">
+      <div class="hero__ellipse" id="hero-ellipse" aria-hidden="true"></div>
       <h1 class="hero__heading" id="hero-heading" aria-live="polite">
         <span class="hero__title hero__title--a" id="hero-word-a">Welcome to</span>
         <span class="hero__title hero__title--b" id="hero-word-b">Kirti’s portfolio</span>
@@ -127,6 +127,12 @@
             t += dur + GAP_MS;
           }
         });
+        // The red ring's gradient makes one full turn over the same time the text is being highlighted
+        const ring = document.getElementById('hero-ellipse');
+        if (ring && !reduce && !animated && ring.animate) {
+          ring.animate([{ '--g': '0deg' }, { '--g': '360deg' }],
+            { duration: Math.max(600, t - GAP_MS - START_DELAY), delay: START_DELAY, easing: 'linear', fill: 'both' });
+        }
       }
 
       // Build after fonts load so line breaks are final, then replay only once.
