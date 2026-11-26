@@ -69,7 +69,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
   border-left: 1px dashed var(--border); border-right: 1px dashed var(--border);
 }
 @property --p { syntax: '<angle>'; inherits: false; initial-value: 360deg; }
-.nav__links { display: flex; align-items: center; gap: 26px; position: relative; }
+.nav__links { display: flex; align-items: center; gap: 31px; position: relative; }
 /* Hand-drawn circle (assets/circle.png as a mask) that a conic mask "draws" around the clicked item */
 .nav__circle { position: absolute; pointer-events: none; opacity: 0; z-index: 0; background: #D20328;
   --p: 360deg;
