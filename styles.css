@@ -195,3 +195,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
   -webkit-mask: var(--stroke) 0 0 / 100% 100% no-repeat; mask: var(--stroke) 0 0 / 100% 100% no-repeat;
 }
 @media (prefers-reduced-motion: reduce) { .marker-stroke { clip-path: inset(0); } }
+
+/* Typewriter caret on the hero words */
+.hero__title.typing::after { content: ""; display: inline-block; width: 3px; height: .82em; margin-left: 5px; background: currentColor; vertical-align: -.04em; animation: caret-blink .75s steps(1) infinite; }
+@keyframes caret-blink { 50% { opacity: 0; } }
