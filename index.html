@@ -253,8 +253,8 @@
     const DESC = 'Three brand specific metrics help a solo operator gauge demand for customization and see how many complete bundles are ready to ship.';
     const TAGS = ['Data Visualization', 'Dashboard Design', 'E- commerce'];
     const PROJECTS = [
-      { name: 'Svaroots',  image: 'assets/project-svaroots-clean.png',  height: 377, status: 'Live', tab: { src: 'assets/svaroots-tab.png', text: 'Click to read on Behance', color: '#fff7f2' },  // tab: red card that rises on hover
-        href: 'https://www.behance.net/gallery/258422673/Svaroots-Operations-Dashboard-for-Modular-Sneakers' },
+      { name: 'Svaroots',  image: 'assets/project-svaroots-clean.png',  height: 377, status: 'Live', tab: { src: 'assets/svaroots-tab.png', text: 'Click to read case study', color: '#fff7f2' },  // tab: red card that rises on hover
+        href: 'svaroots.html', internal: true },   // opens the on-site case study (Behance version is linked from that page)
       { name: 'Vitta – An AI banking assistant', tagline: 'Helping customers beyond a normal banking assistant',
         desc: 'From 12 fields to retype to 6 pre-filled fields to review. Vitta shows customers how a credit card’s benefits fit their spending & saves their progress, so they can return to your application right where you left off.',
         tags: ['Internship Project', 'FinTech', 'Agentic AI', 'B2B2C'], image: 'assets/project-vitta-clean.png',     height: 378, status: 'Live',
@@ -281,8 +281,9 @@
       if (p.href) {
         // Whole card is clickable (stretched link); footer icons stay above it
         const a = document.createElement('a');
-        a.className = 'card__link'; a.href = p.href; a.target = '_blank'; a.rel = 'noopener noreferrer';
-        a.setAttribute('aria-label', 'Open ' + p.name + ' on Behance (opens in a new tab)');
+        a.className = 'card__link'; a.href = p.href;
+        if (p.internal) a.setAttribute('aria-label', 'Read the ' + p.name + ' case study');
+        else { a.target = '_blank'; a.rel = 'noopener noreferrer'; a.setAttribute('aria-label', 'Open ' + p.name + ' on Behance (opens in a new tab)'); }
         card.append(a);
       }
       const img = el.querySelector('.card__image'); if (p.wip) { const w = document.createElement('div'); w.className = 'card__wip'; w.setAttribute('role', 'progressbar'); w.setAttribute('aria-label', 'Work in progress'); w.setAttribute('aria-valuenow', '60'); w.setAttribute('aria-valuemin', '0'); w.setAttribute('aria-valuemax', '100'); w.innerHTML = '<span>Work in progress</span><i></i>'; img.parentElement.append(w); } img.src = p.image; img.alt = p.name + ' project preview'; img.style.height = p.height + 'px';

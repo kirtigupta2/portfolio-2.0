@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Svaroots Ops · Kirti’s Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Short+Stack&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="case-study.css">
+</head>
+<body class="cs-page">
+  <header class="nav">
+    <div class="nav__inner">
+      <nav class="nav__links" aria-label="Primary">
+        <a class="nav__item nav__item--tab" href="index.html#home">Home</a>
+        <a class="nav__item nav__item--tab nav__item--active" href="index.html#work">Work</a>
+        <a class="nav__item nav__item--more" href="assets/Kirti_Gupta_Resume.pdf?v=2" data-resume>Resume <img src="assets/arrow.svg" width="18" height="18" alt=""></a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="cs">
+    <!-- Index: sticky sidebar on desktop, floating button + sheet on phones -->
+    <button class="cs-toc-btn" id="toc-btn" type="button" aria-label="Open case study index" aria-expanded="false" aria-controls="toc">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5h.01M3 10h.01M3 15h.01M7 5h10M7 10h10M7 15h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <aside class="cs-toc" id="toc" aria-label="Case study index">
+      <p class="cs-toc__label">Index</p>
+      <ol>
+        <li><a href="#overview" class="is-active">Overview</a></li>
+        <li><a href="#context">Context</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#opportunity">Opportunity</a></li>
+        <li><a href="#user">User</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#iteration">Process &amp; iteration</a></li>
+        <li><a href="#visual">Visual language</a></li>
+        <li><a href="#reflection">Reflection</a></li>
+      </ol>
+    </aside>
+
+    <main class="cs-main">
+      <p class="cs-crumb"><a href="index.html#work">Work</a> / Svaroots</p>
+      <h1 class="cs-title">Svaroots Ops: an operations dashboard for a modular sneaker brand</h1>
+      <p class="cs-sub">A modular brand breaks the metrics every commerce dashboard assumes. We designed the three that were missing, proved the gap in a live Shopify store, and shipped it.</p>
+
+      <dl class="cs-meta">
+        <div><dt>Role</dt><dd>UX/UI Design, Data Visualisation, Prototyping</dd></div>
+        <div><dt>Team</dt><dd>Kirti Gupta &amp; Digvijay Shelar</dd></div>
+        <div><dt>Course</dt><dd>Visual Interface Design &amp; Design Management</dd></div>
+        <div><dt>Tools</dt><dd>Figma, Figma Make, GitHub, Vercel</dd></div>
+      </dl>
+
+      <section class="cs-summary" aria-labelledby="sum-h">
+        <h2 id="sum-h">Summary</h2>
+        <ul>
+          <li><b>The problem</b> Svaroots sells one base sneaker with swappable textile patches. A standard dashboard can’t run that: Shopify runs the bundle calculation but never reports it.</li>
+          <li><b>What we did</b> Audited a live Shopify store, then designed three brand-specific metrics: Customisation Rate, Patch-to-Sneaker Ratio and Bundle Readiness.</li>
+          <li><b>The result</b> A working operations dashboard, designed in Figma, built with Figma Make, pushed to GitHub and deployed on Vercel.</li>
+        </ul>
+        <p class="cs-links">
+          <a href="https://svarootsdashboard.vercel.app" target="_blank" rel="noopener noreferrer">Try the live prototype ↗</a>
+          <a href="https://www.behance.net/gallery/258422673/Svaroots-Operations-Dashboard-for-Modular-Sneakers" target="_blank" rel="noopener noreferrer">View on Behance ↗</a>
+        </p>
+      </section>
+
+      <!-- Each group is one index entry; the images are the case-study sections, in order -->
+      <section class="cs-group" id="overview" data-title="Overview">
+        <img src="assets/svaroots/01.webp" width="1400" height="900" alt="Svaroots Ops cover: Three numbers. One operator. One dashboard. An operations dashboard for Svaroots, a modular sneaker brand rooted in Indian craft.">
+        <img src="assets/svaroots/02.webp" width="1400" height="1042" loading="lazy" alt="Need and About: “Three numbers run this business. None of them are on my dashboard.” Persona Rahul, E-commerce Operations Manager. Category: Operations Dashboard. Tools: Figma, Figma Make, GitHub, Vercel. Team: Kirti Gupta and Digvijay Shelar. Role: UX/UI Design, Data Visualisation, Prototyping.">
+        <img src="assets/svaroots/03.webp" width="1400" height="880" loading="lazy" alt="Svaroots Ops: operations dashboard for modular sneakers, shown on a monitor.">
+        <img src="assets/svaroots/04.webp" width="1400" height="542" loading="lazy" alt="It shipped. Try the dashboard. Designed in Figma, built with Figma Make, pushed to GitHub and deployed on Vercel at svarootsdashboard.vercel.app.">
+      </section>
+
+      <section class="cs-group" id="context" data-title="Context">
+        <img src="assets/svaroots/05.webp" width="1400" height="1805" loading="lazy" alt="Context, one shoe, many stories. Every order is a base sneaker plus one or more textile patches, so inventory is two linked stockpiles and a pair only ships when both are in stock.">
+      </section>
+
+      <section class="cs-group" id="research" data-title="Research">
+        <img src="assets/svaroots/06.webp" width="1400" height="937" loading="lazy" alt="Research, Shopify audit. Can a standard dashboard run a modular brand? A live Shopify store with the Svaroots catalogue showed that Shopify runs the bundle calculation but never reports it.">
+        <img src="assets/svaroots/07.webp" width="1400" height="2400" loading="lazy" alt="The evidence: Shopify’s own report library has no reports on bundles, patch attach rate or the patch-to-sneaker ratio. Checked on 5 Sept 2026.">
+      </section>
+
+      <section class="cs-group" id="opportunity" data-title="Opportunity">
+        <img src="assets/svaroots/08.webp" width="1400" height="919" loading="lazy" alt="Three numbers this brand runs on. None of them exist in a standard dashboard.">
+        <img src="assets/svaroots/09.webp" width="1400" height="380" loading="lazy" alt="The design challenge: How might we design an operations dashboard around the decisions created by Svaroots’ modular business model?">
+      </section>
+
+      <section class="cs-group" id="user" data-title="User">
+        <img src="assets/svaroots/10.webp" width="1400" height="484" loading="lazy" alt="The assumed setup: one person, no analyst, so the dashboard had to answer, not just report.">
+        <img src="assets/svaroots/11.webp" width="1400" height="994" loading="lazy" alt="Meet Rahul, E-commerce Operations Manager. One online store, one warehouse, a small team, and no analyst.">
+        <img src="assets/svaroots/12.webp" width="1400" height="446" loading="lazy" alt="Clarity in every operational decision.">
+      </section>
+
+      <section class="cs-group" id="solution" data-title="Solution">
+        <img src="assets/svaroots/13.webp" width="1400" height="1479" loading="lazy" alt="User flow: structured around how an operator works. Six operational areas plus settings, organised as a tabbed workspace.">
+        <img src="assets/svaroots/14.webp" width="1400" height="1668" loading="lazy" alt="Where the new metrics live: patch-to-sneaker ratio (2.4 patches per sneaker), customisation rate (68% of sneakers leave wearing a patch) and bundle readiness (195 pairs ready to ship).">
+        <img src="assets/svaroots/15.webp" width="1400" height="1656" loading="lazy" alt="Stock you own is not stock you can sell. Sneakers and patches are counted separately and “can ship today” is the smaller of the two counts.">
+        <img src="assets/svaroots/16.webp" width="1400" height="1981" loading="lazy" alt="Every chart ends in a button: data, insight and action on one screen, including the dead stock view with reason and status as separate columns.">
+      </section>
+
+      <section class="cs-group" id="iteration" data-title="Process &amp; iteration">
+        <img src="assets/svaroots/17.webp" width="1400" height="3201" loading="lazy" alt="Three things we got wrong first: everything stacked vertically, tables that exposed every action at once, and alerts that did not lead with the problem.">
+      </section>
+
+      <section class="cs-group" id="visual" data-title="Visual language">
+        <img src="assets/svaroots/18.webp" width="1400" height="1429" loading="lazy" alt="Design with typography and colour. Earthy craft colours from the brand guideline, Nunito Sans for data and Atma for the brand voice.">
+      </section>
+
+      <section class="cs-group" id="reflection" data-title="Reflection">
+        <img src="assets/svaroots/19.webp" width="1400" height="1487" loading="lazy" alt="We built it, not just designed it, and what we’d test with real operators. We started with “What should we put on the dashboard?” and ended with “What decision should this information help someone make?”">
+        <img src="assets/svaroots/20.webp" width="1400" height="828" loading="lazy" alt="Thanks for scrolling. Svaroots Ops is an operations dashboard for modular sneakers. Live prototype on Vercel.">
+      </section>
+
+      <p class="cs-back"><a href="index.html#work">← Back to all work</a></p>
+    </main>
+  </div>
+
+  <script src="resume.js"></script>
+  <script>
+    // Index: smooth-scroll to a section, highlight the section being read, phone sheet toggle
+    (function () {
+      const links = [...document.querySelectorAll('#toc a')];
+      const groups = links.map(a => document.querySelector(a.getAttribute('href')));
+      const btn = document.getElementById('toc-btn'), toc = document.getElementById('toc');
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const setActive = id => links.forEach(a => {
+        const on = a.getAttribute('href') === '#' + id;
+        a.classList.toggle('is-active', on);
+        if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      });
+      const closeToc = () => { toc.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); };
+      btn.addEventListener('click', () => {
+        const open = toc.classList.toggle('is-open'); btn.setAttribute('aria-expanded', String(open));
+      });
+      links.forEach(a => a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        history.replaceState(null, '', a.getAttribute('href'));
+        setActive(t.id); closeToc();
+      }));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeToc(); });
+      // The active entry is the last section whose top has passed the reading line (just under the nav)
+      let ticking = false;
+      function spy() {
+        ticking = false;
+        const line = innerHeight * 0.3; let cur = groups[0];
+        groups.forEach(g => { if (g.getBoundingClientRect().top <= line) cur = g; });
+        if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = groups[groups.length - 1];
+        setActive(cur.id);
+      }
+      addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
+      addEventListener('resize', spy);
+      spy();
+      if (location.hash && document.querySelector(location.hash)) setTimeout(() => document.querySelector(location.hash).scrollIntoView(), 50);
+    })();
+  </script>
+</body>
+</html>
