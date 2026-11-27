@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Breezy · Kirti’s Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Short+Stack&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="case-study.css">
+</head>
+<body class="cs-page">
+  <header class="nav">
+    <div class="nav__inner">
+      <nav class="nav__links" aria-label="Primary">
+        <a class="nav__item nav__item--tab" href="index.html#home">Home</a>
+        <a class="nav__item nav__item--tab nav__item--active" href="index.html#work">Work</a>
+        <a class="nav__item nav__item--more" href="assets/Kirti_Gupta_Resume.pdf?v=2" data-resume>Resume <img src="assets/arrow.svg" width="18" height="18" alt=""></a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="cs">
+    <!-- Index: sticky sidebar on desktop, floating button + sheet on phones -->
+    <button class="cs-toc-btn" id="toc-btn" type="button" aria-label="Open case study index" aria-expanded="false" aria-controls="toc">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5h.01M3 10h.01M3 15h.01M7 5h10M7 10h10M7 15h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <aside class="cs-toc" id="toc" aria-label="Case study index">
+      <p class="cs-toc__label">Index</p>
+      <ol>
+        <li><a href="#overview" class="is-active">Overview</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#how">How Breezy works</a></li>
+        <li><a href="#games">The games</a></li>
+        <li><a href="#identity">Brand &amp; characters</a></li>
+        <li><a href="#packaging">Packaging</a></li>
+      </ol>
+    </aside>
+
+    <main class="cs-main">
+      <p class="cs-crumb"><a href="index.html#work">Work</a> / Breezy</p>
+      <h1 class="cs-title">Breezy – A breath-controlled game for children</h1>
+      <p class="cs-sub">A flute, four animal friends and a calmer child. Breezy makes breathing practice feel like play, designed to ease anxiety before medical tests and help children aged 5–10 keep practising.</p>
+
+      <dl class="cs-meta">
+        <div><dt>My role</dt><dd>UX research, Product strategy, Interaction &amp; System Design, Branding &amp; Packaging</dd></div>
+        <div><dt>Scope</dt><dd>UI, UX, Interaction Design</dd></div>
+        <div><dt>Industry</dt><dd>Healthcare</dd></div>
+        <div><dt>Project type</dt><dd>Academic</dd></div>
+        <div><dt>Duration</dt><dd>3 weeks, 2026</dd></div>
+      </dl>
+
+      <section class="cs-summary" aria-labelledby="sum-h">
+        <h2 id="sum-h">Summary</h2>
+        <ul>
+          <li><b>What it is</b> Breezy reimagines pediatric respiratory therapy by transforming clinical breathing exercises into an engaging digital-physical gaming experience. It uses mechanics like short puffs to hop across lily pads, breaks the monotonous loop and turns a daily medical chore into a fun skill-building experience.</li>
+          <li><b>At a glance</b> 4 games, for children aged 5–10, with a flute as the game controller.</li>
+        </ul>
+        <p class="cs-links">
+          <a href="https://www.behance.net/gallery/256071703/Breezy-Rethinking-breathing-therapy-through-play" target="_blank" rel="noopener noreferrer">View on Behance ↗</a>
+        </p>
+      </section>
+
+      <!-- Each group is one index entry; the images are the case-study sections, in order -->
+      <section class="cs-group" id="overview" data-title="Overview">
+        <img src="assets/breezy/01.webp" width="1920" height="1259" alt="Breezy at a glance. Scope: UI, UX, Interaction Design. Industry: Healthcare. Project type: Academic. Duration: 3 weeks. Year: 2026. My role: UX research, product strategy, interaction and system design, branding and packaging. Breathe easy with Breezy, a tablet game with a frog, an owl and a butterfly.">
+        <img src="assets/breezy/02.webp" width="1920" height="1954" loading="lazy" alt="Introducing Breezy: it reimagines pediatric respiratory therapy by transforming clinical breathing exercises into an engaging digital-physical gaming experience. 4 games, age group 5-10, a flute as the game controller.">
+      </section>
+
+      <section class="cs-group" id="research" data-title="Research">
+        <img src="assets/breezy/03.webp" width="1920" height="3271" loading="lazy" alt="Research into pediatric respiratory issues and respiratory therapies, and the three key insights that emerged, including the dyspnea-anxiety cycle.">
+        <img src="assets/breezy/04.webp" width="1920" height="4393" loading="lazy" alt="Supporting evidence for our decisions, including bubble breath therapy (2025) on playful breathing, and wind-instrument training that supports the use of a flute for breathing exercises.">
+      </section>
+
+      <section class="cs-group" id="how" data-title="How Breezy works">
+        <img src="assets/breezy/05.webp" width="1920" height="5237" loading="lazy" alt="How Breezy works: the physical setup, the hardware flow and the game logic that turns each breath into an interaction, including calibrating a soft and a strong blow with an Arduino.">
+      </section>
+
+      <section class="cs-group" id="games" data-title="The games">
+        <img src="assets/breezy/06.webp" width="1920" height="4275" loading="lazy" alt="Mapping four breathing techniques to four dedicated games, each designed to maximise its specific benefits, with the breath mechanic and clinical benefits of each.">
+      </section>
+
+      <section class="cs-group" id="identity" data-title="Brand &amp; characters">
+        <img src="assets/breezy/07.webp" width="1920" height="714" loading="lazy" alt="We have now figured out the game. Let us move on to giving Breezy its own world, characters and identity.">
+        <img src="assets/breezy/08.webp" width="1920" height="3418" loading="lazy" alt="Branding, game design and packaging: defining the visual language that brings Breezy’s world together, with rounded, friendly typefaces.">
+        <img src="assets/breezy/09.webp" width="1920" height="5980" loading="lazy" alt="Four distinct characters, one for each game, with concepts for the lily pad hop game, the songbird echo game and the garden game.">
+      </section>
+
+      <section class="cs-group" id="packaging" data-title="Packaging">
+        <img src="assets/breezy/10.webp" width="1920" height="4626" loading="lazy" alt="Packaging designed to make the setup feel like part of the Breezy experience: a premium printed finish, 3D pop-up elements, compartments for the flute, sensor and pipe, origami instructions and sheets, and the packaging dielines. Thank you for your time.">
+      </section>
+
+      <p class="cs-back"><a href="index.html#work">← Back to all work</a></p>
+    </main>
+  </div>
+
+  <script src="resume.js"></script>
+  <script src="case-study.js"></script>
+</body>
+</html>
