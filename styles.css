@@ -118,7 +118,7 @@ html[data-theme="light"] .hero__ellipse { top: 71.2%; }
 .hero__figure { position: absolute; width: var(--fw); aspect-ratio: 360.822 / 415.146; left: calc(50% - var(--fw) * 0.67945); top: calc(var(--fw) * 0.17461); container-type: inline-size; }
 .hero__heading { position: absolute; inset: 0; margin: 0; }
 .hero__title { position: absolute; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.035em; font-size: 16.07cqw; line-height: normal; color: var(--text); white-space: nowrap; }
-.hero__title--a { right: 65.5%; text-align: right; top: 7.83%; }   /* both first words end at the same spot, tucked slightly behind the hair (as in the original design) */
+.hero__title--a { right: 66.2%; text-align: right; top: 7.83%; }   /* both first words end at the same spot, tucked slightly behind the hair (as in the original design) */
 .hero__title--b { left: 83%; top: 33.09%; }
 .hero__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }   /* flat 2D cutout: no glow or shadow */
 /* Arrows: outer box from Figma insets; inner box is the rotated vector (Figma's rotation math, precomputed) */
