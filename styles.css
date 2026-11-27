@@ -270,3 +270,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 .resume-modal__fallback { margin: 0; padding: 8px 16px; font-size: 14px; color: var(--muted); border-top: 1px dashed var(--border); }
 .resume-modal__fallback a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 600px) { .resume-modal { padding: 8px; } .resume-modal__panel { height: 96vh; } }
+
+/* Thank-you note at the bottom of the home page */
+.thanks { border-top: 1px dashed var(--border); padding: 48px 20px 64px; text-align: center; }
+.thanks p { margin: 0; font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 20.973px; line-height: 29.362px; color: var(--note); }
