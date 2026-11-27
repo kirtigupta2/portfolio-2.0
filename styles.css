@@ -79,6 +79,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
   mask-composite: intersect; }
 .nav__item { position: relative; z-index: 1; }
 .nav__item { font-size: 18px; font-weight: 500; color: var(--nav); display: flex; align-items: center; gap: 5px; }
+.nav__item[hidden] { display: none; }
 .nav__item:hover { color: var(--nav-hover); }
 .nav__item--tab { position: relative; }
 .nav__item--active, .nav__item--active:hover { color: var(--nav-active); font-weight: 600; }
