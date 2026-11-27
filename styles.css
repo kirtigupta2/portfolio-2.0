@@ -123,6 +123,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 
 /* Projects */
 .projects { border-top: 1px dashed var(--border); padding: 16px 0 24px; display: flex; flex-direction: column; gap: 16px; }
+.projects[hidden] { display: none; }
 .projects__header { padding: 0 28px 0 20px; }
 .projects__header h2 { font-size: 28px; white-space: nowrap; flex-shrink: 0; }
 .projects--work { padding-bottom: 0; }   /* starts at 703px at the Figma size (hero min-height includes the 52px gap) */
