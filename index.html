@@ -23,8 +23,7 @@
         <span class="nav__circle" id="nav-circle" aria-hidden="true"></span>
         <a class="nav__item nav__item--tab nav__item--active" href="#home" aria-current="page">Home</a>
         <a class="nav__item nav__item--tab" href="#work">Work</a>
-        <!-- Process hidden until the page is designed: remove `hidden` to bring it back -->
-        <a class="nav__item nav__item--tab" href="about.html" hidden>Process</a>
+        <a class="nav__item nav__item--tab" href="#about">Process</a>
         <a class="nav__item nav__item--more" href="assets/Kirti_Gupta_Resume.pdf?v=2" data-resume>Resume <img src="assets/arrow.svg" data-dark="assets/arrow.svg" data-light="assets/arrow-light.svg" width="18" height="18" alt=""></a>
         <button hidden class="nav__theme" id="theme-toggle" type="button" aria-label="Switch to the bright theme" aria-pressed="false"><img src="assets/theme-sun.svg" data-dark="assets/theme-sun.svg" data-light="assets/theme-sun-light.svg" width="20" height="20" alt=""></button>
       </nav>
@@ -209,7 +208,7 @@
         on ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current');
       });
     }
-    // Hand-drawn circle: drawn around Home / Work / About when you click it, and it stays on the chosen item
+    // Hand-drawn circle: drawn around Home / Work / Process when you click it, and it stays on the chosen item
     const circle = document.getElementById('nav-circle'), links = circle.parentElement;
     const noMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     let circleAnim = null, lastClick = -9999;
@@ -231,14 +230,7 @@
     // back at the very top the circle simply sits on Home again
     function hideCircle() { if (circleAnim) circleAnim.cancel(); placeCircle(tabs[0]); }
     tabs.forEach(t => t.addEventListener('click', () => { lastClick = performance.now(); setActive(t.getAttribute('href')); drawCircle(t); }));
-    // About is a different page: let the circle finish drawing before leaving
-    const about = document.querySelector('.nav__item--tab[href="about.html"]');
-    about.addEventListener('click', e => {
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
-      e.preventDefault(); drawCircle(about);
-      setTimeout(() => { location.href = about.getAttribute('href'); }, noMotion ? 0 : 750);
-    });
-    addEventListener('scroll', () => { if (scrollY < 10) { setActive('#home'); if (performance.now() - lastClick > 1500) hideCircle(); } }, { passive: true });
+    addEventListener('scroll', () => { if (scrollY < 10 && performance.now() - lastClick > 1500) { setActive('#home'); hideCircle(); } }, { passive: true });   // (the first frames of a smooth scroll still read scrollY≈0, so ignore them right after a click)
     setActive(tabs.some(t => t.getAttribute('href') === location.hash) ? location.hash : '#home');
     // By default the circle sits on the active item (Home)
     const startItem = tabs.find(t => t.classList.contains('nav__item--active')) || tabs[0];
