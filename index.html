@@ -20,26 +20,28 @@
         <span class="nav__circle" id="nav-circle" aria-hidden="true"></span>
         <a class="nav__item nav__item--tab nav__item--active" href="#home" aria-current="page">Home</a>
         <a class="nav__item nav__item--tab" href="#work">Work</a>
-        <!-- About hidden until the page is designed: remove `hidden` to bring it back -->
-        <a class="nav__item nav__item--tab" href="about.html" hidden>About</a>
+        <!-- Process hidden until the page is designed: remove `hidden` to bring it back -->
+        <a class="nav__item nav__item--tab" href="about.html" hidden>Process</a>
         <a class="nav__item nav__item--more" href="#resume">Resume <img src="assets/arrow.svg" data-dark="assets/arrow.svg" data-light="assets/arrow-light.svg" width="18" height="18" alt=""></a>
-        <button class="nav__theme" id="theme-toggle" type="button" aria-label="Switch to the bright theme" aria-pressed="false"><img src="assets/theme-sun.svg" data-dark="assets/theme-sun.svg" data-light="assets/theme-sun-light.svg" width="20" height="20" alt=""></button>
+        <button hidden class="nav__theme" id="theme-toggle" type="button" aria-label="Switch to the bright theme" aria-pressed="false"><img src="assets/theme-sun.svg" data-dark="assets/theme-sun.svg" data-light="assets/theme-sun-light.svg" width="20" height="20" alt=""></button>
       </nav>
     </div>
   </header>
   <div class="column">
     <section class="hero" id="home">
-      <div class="hero__ellipse" id="hero-ellipse" aria-hidden="true"></div>
       <h1 class="hero__heading" id="hero-heading" aria-live="polite">
         <span class="hero__title hero__title--a" id="hero-word-a">Welcome to</span>
         <span class="hero__title hero__title--b" id="hero-word-b">Kirti’s portfolio</span>
       </h1>
-      <img class="hero__photo" src="assets/image5.png" alt="Portrait of Kirti holding a coffee cup">
+      <div class="hero__figure">
+        <div class="hero__ellipse" id="hero-ellipse" aria-hidden="true"></div>
+        <img class="hero__photo" src="assets/image5.png" alt="Portrait of Kirti holding a coffee cup">
+      </div>
       <div class="hero__arrow hero__arrow--a"><div class="hero__arrow-inner"><img src="assets/vector.svg" alt=""></div></div>
       <div class="hero__arrow hero__arrow--b"><div class="hero__arrow-inner"><img src="assets/vector1.svg" alt=""></div></div>
       <p class="hand hand--left">prev a summer intern @</p>
       <p class="hand-group"><span class="hand-text">Accenture Song</span><img src="assets/accenture-logo.png" width="17" height="17" alt="Accenture logo"></p>
-      <p class="hand hand--right">I connect what <span class="mark">people need with what a business is striving to achieve, then ideate, sketch and build ideas</span> that bring the two together.</p>
+      <p class="hand hand--right">I connect what <span class="mark">people need with what a business wants to achieve, then explore ideas, sketch them out, and build solutions</span> that bring the two together.</p>
     </section>
 
     <section class="projects projects--work" id="work">
@@ -93,26 +95,6 @@
       const MIN_MS = 450, GAP_MS = 120;   // min stroke time / pause when "moving" to the next line
       const EASE = 'cubic-bezier(.5,.05,.3,1)';
 
-      // Marker-on-paper sound: one play per stroke, started with the stroke (browsers may block sound before the first click/tap/key press)
-      const sfx = new Audio('assets/highlighter.mp3'); sfx.preload = 'auto'; sfx.volume = 0.7;
-      let soundBlocked = false, replayed = false;
-      const strokes = [];                      // { anim, delay, at } for each stroke, so the highlight can be replayed with sound
-      function playSfx() {
-        try {
-          const a = sfx.cloneNode(); a.volume = sfx.volume; const p = a.play();
-          if (p && p.catch) p.catch(() => { if (!soundBlocked) { soundBlocked = true; armReplay(); } });
-        } catch (e) {}
-      }
-      // Browsers refuse sound before the visitor has interacted. If that happened, the first click / tap / key press
-      // replays the highlight (with sound) as long as the heading is still on screen.
-      function armReplay() {
-        const go = () => {
-          ['pointerdown', 'keydown', 'touchstart'].forEach(ev => removeEventListener(ev, go, true));
-          if (replayed || scrollY > 400) return; replayed = true;
-          strokes.forEach(s => { s.anim.cancel(); s.anim.effect.updateTiming({ delay: s.at + 150 }); s.anim.play(); setTimeout(playSfx, s.at + 150); });
-        };
-        ['pointerdown', 'keydown', 'touchstart'].forEach(ev => addEventListener(ev, go, true));
-      }
       let layer = host.querySelector('.marker-layer');
       let animated = false;
 
@@ -142,12 +124,10 @@
           if (reduce || animated) {
             wrap.style.clipPath = 'inset(0)';
           } else {
-            const anim = wrap.animate(
+            wrap.animate(
               [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)' }],
               { duration: dur, delay: t, easing: EASE, fill: 'both' }
             );
-            strokes.push({ anim, at: t - START_DELAY });
-            setTimeout(playSfx, t);
             t += dur + GAP_MS;
           }
         });
@@ -191,38 +171,25 @@
       });
     })();
 
-    // ---- Typewriter: once the highlighter has finished, the hero words are deleted letter by letter
-    //      ("Welcome to / Kirti's portfolio") and "Product / Designer" is typed in their place ----
+    // ---- 3 seconds after the page loads, the hero words change: "Welcome to / Kirti's portfolio" -> "Product / Designer" ----
     (function () {
       const a = document.getElementById('hero-word-a'), b = document.getElementById('hero-word-b');
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const PAUSE_AFTER_HIGHLIGHT = 700;     // ms to let the finished highlight breathe
-      const DELETE_MS = 42, TYPE_MS = 85;    // ms per letter
-      const sleep = ms => new Promise(r => setTimeout(r, ms));
-      async function erase(el) {
-        el.classList.add('typing');
-        while (el.textContent.length) { el.textContent = el.textContent.slice(0, -1); await sleep(DELETE_MS); }
+      const DELAY = 3000;                                   // ms after load
+      function swap(el, text, left, wait) {
+        const apply = () => { el.textContent = text; if (left) el.style.left = left; };
+        if (reduce) { setTimeout(apply, wait); return; }
+        setTimeout(() => {
+          el.animate([{ opacity: 1, transform: 'translateY(0)' }, { opacity: 0, transform: 'translateY(-16px)' }],
+                     { duration: 380, easing: 'cubic-bezier(.5,0,.9,.5)', fill: 'forwards' }).finished.then(() => {
+            apply();                                        // new word + its Figma position, swapped while invisible
+            el.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'translateY(0)' }],
+                       { duration: 520, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
+          });
+        }, wait);
       }
-      async function type(el, text) {
-        el.classList.add('typing');
-        for (const ch of text) { el.textContent += ch; await sleep(TYPE_MS + Math.random() * 40); }
-      }
-      let started = false;
-      async function run() {
-        if (started) return; started = true;
-        if (reduce) { a.textContent = 'Product'; a.style.left = '291.17px'; b.textContent = 'Designer'; return; }
-        await sleep(PAUSE_AFTER_HIGHLIGHT);
-        await Promise.all([erase(a), erase(b)]);       // type back (delete)
-        a.classList.remove('typing'); b.classList.remove('typing');
-        await sleep(280);
-        a.style.left = '291.17px';                     // Figma position of "Product"
-        await type(a, 'Product'); a.classList.remove('typing');
-        await sleep(160);
-        await type(b, 'Designer');
-        setTimeout(() => b.classList.remove('typing'), 2250);   // caret blinks 3 times (3 x 0.75s), then goes
-      }
-      addEventListener('highlight-done', run, { once: true });
-      setTimeout(run, 12000);                          // safety net if the highlighter never reports
+      const start = () => { swap(a, 'Product', '291.17px', DELAY); swap(b, 'Designer', null, DELAY + 120); };
+      document.readyState === 'complete' ? start() : addEventListener('load', start, { once: true });
     })();
 
     // Nav: Home / Work swap on click (scrolling manually never changes the tab, except back at the very top).
@@ -287,11 +254,14 @@
       { name: 'Breezy',    image: 'assets/project-breezy-clean.png',    height: 416, status: 'Live',
         tab: { src: 'assets/breezy-tab.png', text: 'Click to read on Behance', color: '#ffffff', top: -10, h: 56, clip: 'polygon(11.5px 0px, 192.5px 0px, 192.25px 57px, 191.25px 58px, 190.25px 58.5px, 189.25px 58.5px, 188.25px 58.5px, 187.25px 58.5px, 186.25px 58.5px, 185.25px 58.5px, 184.25px 58.5px, 183.25px 58.5px, 182.25px 58.5px, 181.25px 58.5px, 180.25px 58.5px, 179.25px 58.5px, 178.25px 58.5px, 177.25px 58.5px, 176.25px 58.5px, 175.25px 58.5px, 174.25px 58.5px, 173.25px 58.5px, 172.25px 58.5px, 171.25px 58.5px, 170.25px 58.5px, 169.25px 58.5px, 168.25px 58.5px, 167.25px 58.5px, 166.25px 58.5px, 165.25px 58.5px, 164.25px 58.5px, 163.25px 58px, 162.25px 58.5px, 161.25px 58.5px, 160.25px 58.5px, 159.25px 58.5px, 158.25px 58.5px, 157.25px 58.5px, 156.25px 58.5px, 155.25px 58.5px, 154.25px 58.5px, 153.25px 58.5px, 152.25px 58.5px, 151.25px 58.5px, 150.25px 58.5px, 149.25px 58.5px, 148.25px 58.5px, 147.25px 58.5px, 146.25px 58.5px, 145.25px 58.5px, 144.25px 58.5px, 143.25px 58px, 142.25px 58.5px, 141.25px 58.5px, 140.25px 58.5px, 139.25px 58.5px, 138.25px 58.5px, 137.25px 58.5px, 136.25px 58.5px, 135.25px 58.5px, 134.25px 58.5px, 133.25px 58.5px, 132.25px 58.5px, 131.25px 58.5px, 130.25px 58.5px, 129.25px 58.5px, 128.25px 58.5px, 127.25px 58.5px, 126.25px 58.5px, 125.25px 58.5px, 124.25px 58.5px, 123.25px 58.5px, 122.25px 58.5px, 121.25px 58.5px, 120.25px 58.5px, 119.25px 58.5px, 118.25px 58.5px, 117.25px 58.5px, 116.25px 58.5px, 115.25px 58.5px, 114.25px 58.5px, 113.25px 58.5px, 112.25px 58.5px, 111.25px 58.5px, 110.25px 58.5px, 109.25px 58.5px, 108.25px 58.5px, 107.25px 58.5px, 106.25px 58.5px, 105.25px 58.5px, 104.25px 58.5px, 103.25px 58.5px, 102.25px 58.5px, 101.25px 58.5px, 100.25px 58.5px, 99.25px 58.5px, 98.25px 58.5px, 97.25px 58.5px, 96.25px 58.5px, 95.25px 58.5px, 94.25px 58.5px, 93.25px 58.5px, 92.25px 58.5px, 91.25px 58.5px, 90.25px 58.5px, 89.25px 58.5px, 88.25px 58.5px, 87.25px 58.5px, 86.25px 58.5px, 85.25px 58.5px, 84.25px 58.5px, 83.25px 58.5px, 82.25px 58.5px, 81.25px 58.5px, 80.25px 58.5px, 79.25px 58.5px, 78.25px 58.5px, 77.25px 58.5px, 76.25px 58.5px, 75.25px 58.5px, 74.25px 58.5px, 73.25px 58.5px, 72.25px 58px, 71.25px 58px, 70.25px 58.5px, 69.25px 58.5px, 68.25px 58.5px, 67.25px 58.5px, 66.25px 58.5px, 65.25px 58.5px, 64.25px 58.5px, 63.25px 58.5px, 62.25px 58.5px, 61.25px 58.5px, 60.25px 58.5px, 59.25px 58.5px, 58.25px 58.5px, 57.25px 58.5px, 56.25px 58.5px, 55.25px 58.5px, 54.25px 58.5px, 53.25px 58.5px, 52.25px 58.5px, 51.25px 58.5px, 50.25px 58.5px, 49.25px 58.5px, 48.25px 58.5px, 47.25px 58.5px, 46.25px 58.5px, 45.25px 58.5px, 44.25px 58.5px, 43.25px 58.5px, 42.25px 58.5px, 41.25px 58.5px, 40.25px 58.5px, 39.25px 58.5px, 38.25px 58.5px, 37.25px 58.5px, 36.25px 58.5px, 35.25px 58.5px, 34.25px 58.5px, 33.25px 58.5px, 32.25px 58.5px, 31.25px 58.5px, 30.25px 58.5px, 29.25px 58.5px, 28.25px 58.5px, 27.25px 58.5px, 26.25px 58.5px, 25.25px 58.5px, 24.25px 58.5px, 23.25px 58.5px, 22.25px 58px, 21.25px 58px, 20.25px 58.5px, 19.25px 58px, 18.25px 57.5px, 17.25px 57px, 16.25px 56px, 15.25px 55.5px, 14.25px 54.5px, 13.25px 52.5px, 12.25px 52px, 11.75px 50.5px)' },
         href: 'https://www.behance.net/gallery/256071703/Breezy-Rethinking-breathing-therapy-through-play' },
-      { name: 'PromptKit', image: 'assets/project-promptkit-clean.png', height: 416, status: 'Coming Soon',
+      { name: 'PromptKit', image: 'assets/project-promptkit-clean.png', height: 416, status: 'Coming Soon', wip: true,
         tab: { src: 'assets/promptkit-tab.png', text: 'Coming Soon', color: '#ffffff', top: -10, h: 56, clip: 'polygon(11.5px 0px, 192.5px 0px, 192.25px 56.5px, 191.25px 58px, 190.25px 58px, 189.25px 58px, 188.25px 58.5px, 187.25px 58.5px, 186.25px 58.5px, 185.25px 58.5px, 184.25px 58.5px, 183.25px 58.5px, 182.25px 58.5px, 181.25px 58.5px, 180.25px 58.5px, 179.25px 58.5px, 178.25px 58.5px, 177.25px 58.5px, 176.25px 58.5px, 175.25px 58.5px, 174.25px 58.5px, 173.25px 58.5px, 172.25px 58.5px, 171.25px 58.5px, 170.25px 58.5px, 169.25px 58.5px, 168.25px 58.5px, 167.25px 58.5px, 166.25px 58.5px, 165.25px 58.5px, 164.25px 58px, 163.25px 58px, 162.25px 58px, 161.25px 58.5px, 160.25px 58px, 159.25px 58.5px, 158.25px 58.5px, 157.25px 58.5px, 156.25px 58.5px, 155.25px 58.5px, 154.25px 58.5px, 153.25px 58.5px, 152.25px 58.5px, 151.25px 58.5px, 150.25px 58.5px, 149.25px 58.5px, 148.25px 58.5px, 147.25px 58.5px, 146.25px 58.5px, 145.25px 58.5px, 144.25px 58px, 143.25px 58px, 142.25px 58.5px, 141.25px 58.5px, 140.25px 58.5px, 139.25px 58.5px, 138.25px 58.5px, 137.25px 58.5px, 136.25px 58.5px, 135.25px 58.5px, 134.25px 58.5px, 133.25px 58.5px, 132.25px 58px, 131.25px 58.5px, 130.25px 58.5px, 129.25px 58.5px, 128.25px 58.5px, 127.25px 58.5px, 126.25px 58.5px, 125.25px 58.5px, 124.25px 58.5px, 123.25px 58.5px, 122.25px 58.5px, 121.25px 58.5px, 120.25px 58.5px, 119.25px 58px, 118.25px 58.5px, 117.25px 58.5px, 116.25px 58px, 115.25px 58px, 114.25px 58.5px, 113.25px 58.5px, 112.25px 58.5px, 111.25px 58.5px, 110.25px 58.5px, 109.25px 58.5px, 108.25px 58.5px, 107.25px 58.5px, 106.25px 58.5px, 105.25px 58.5px, 104.25px 58.5px, 103.25px 58.5px, 102.25px 58.5px, 101.25px 58.5px, 100.25px 58.5px, 99.25px 58.5px, 98.25px 58.5px, 97.25px 58.5px, 96.25px 58.5px, 95.25px 58.5px, 94.25px 58.5px, 93.25px 58.5px, 92.25px 58.5px, 91.25px 58.5px, 90.25px 58.5px, 89.25px 58.5px, 88.25px 58.5px, 87.25px 58.5px, 86.25px 58.5px, 85.25px 58.5px, 84.25px 58.5px, 83.25px 58.5px, 82.25px 58.5px, 81.25px 58.5px, 80.25px 58.5px, 79.25px 58.5px, 78.25px 58.5px, 77.25px 58.5px, 76.25px 58.5px, 75.25px 58.5px, 74.25px 58.5px, 73.25px 58px, 72.25px 58.5px, 71.25px 58px, 70.25px 58.5px, 69.25px 58.5px, 68.25px 58.5px, 67.25px 58.5px, 66.25px 58.5px, 65.25px 58.5px, 64.25px 58.5px, 63.25px 58.5px, 62.25px 58.5px, 61.25px 58.5px, 60.25px 58.5px, 59.25px 58.5px, 58.25px 58.5px, 57.25px 58.5px, 56.25px 58.5px, 55.25px 58.5px, 54.25px 58.5px, 53.25px 58.5px, 52.25px 58.5px, 51.25px 58.5px, 50.25px 58.5px, 49.25px 58.5px, 48.25px 58.5px, 47.25px 58.5px, 46.25px 58.5px, 45.25px 58.5px, 44.25px 58.5px, 43.25px 58.5px, 42.25px 58.5px, 41.25px 58.5px, 40.25px 58.5px, 39.25px 58.5px, 38.25px 58.5px, 37.25px 58.5px, 36.25px 58.5px, 35.25px 58.5px, 34.25px 58.5px, 33.25px 58.5px, 32.25px 58.5px, 31.25px 58.5px, 30.25px 58.5px, 29.25px 58.5px, 28.25px 58.5px, 27.25px 58.5px, 26.25px 58.5px, 25.25px 58.5px, 24.25px 58.5px, 23.25px 58.5px, 22.25px 58px, 21.25px 58px, 20.25px 58.5px, 19.25px 58px, 18.25px 57.5px, 17.25px 57px, 16.25px 56px, 15.25px 55.5px, 14.25px 54.5px, 13.25px 52.5px, 12.25px 52px, 11.75px 50.5px)' } },
     ];
     const tpl = document.getElementById('card');
     const grid = document.getElementById('work-grid');
+    // Keep the hover tabs aligned when the card images shrink (cards narrower than 566px)
+    function fitTabs() { document.querySelectorAll('.card__media').forEach(m => { m.style.setProperty('--z', Math.min(1, m.clientWidth / 566)); }); }
+    if (window.ResizeObserver) new ResizeObserver(fitTabs).observe(grid); else addEventListener('resize', fitTabs);
     PROJECTS.forEach(p => {
       const el = tpl.content.cloneNode(true);
       const card = el.querySelector('.card');
@@ -302,7 +272,7 @@
         a.setAttribute('aria-label', 'Open ' + p.name + ' on Behance (opens in a new tab)');
         card.append(a);
       }
-      const img = el.querySelector('.card__image'); img.src = p.image; img.alt = p.name + ' project preview'; img.style.height = p.height + 'px';
+      const img = el.querySelector('.card__image'); if (p.wip) { const w = document.createElement('div'); w.className = 'card__wip'; w.setAttribute('role', 'progressbar'); w.setAttribute('aria-label', 'Work in progress'); w.setAttribute('aria-valuenow', '60'); w.setAttribute('aria-valuemin', '0'); w.setAttribute('aria-valuemax', '100'); w.innerHTML = '<span>Work in progress</span><i></i>'; img.parentElement.append(w); } img.src = p.image; img.alt = p.name + ' project preview'; img.style.height = p.height + 'px';
       if (p.tab) {
         // Only the tab moves: it rises ~10px over the (static) folder image and shows live text
         const t = p.tab, tab = document.createElement('div');
@@ -323,6 +293,7 @@
       TAGS.forEach(t => { const li = document.createElement('li'); li.textContent = t; el.querySelector('.card__tags').append(li); });
       grid.append(el);
     });
+    fitTabs();
   </script>
 </body>
 </html>

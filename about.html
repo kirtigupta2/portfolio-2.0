@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About · Kirti’s Portfolio</title>
+  <title>Process · Kirti’s Portfolio</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     .soon { position: relative; min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding: 0 24px 80px; }
-    .soon h1 { font-size: 67.112px; line-height: normal; color: var(--text); }
+    .soon h1 { font-size: clamp(32px, 11.5vw, 67.112px); line-height: normal; color: var(--text); }
     .soon p { font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 20.973px; line-height: 29.362px; color: var(--note); }
+    @media (max-width: 1180px) { .nav__inner { padding: 0 12px; } .nav__links { gap: 14px; } .nav__item { font-size: 15px; } .nav__item img { width: 14px; height: 14px; } }
     .soon a { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
   </style>
 </head>
@@ -19,9 +20,9 @@
         <span class="nav__circle" id="nav-circle" aria-hidden="true"></span>
         <a class="nav__item nav__item--tab" href="index.html#home">Home</a>
         <a class="nav__item nav__item--tab" href="index.html#work">Work</a>
-        <a class="nav__item nav__item--tab nav__item--active" href="about.html" aria-current="page" hidden>About</a>
+        <a class="nav__item nav__item--tab nav__item--active" href="about.html" aria-current="page" hidden>Process</a>
         <a class="nav__item nav__item--more" href="#resume">Resume <img src="assets/arrow.svg" width="18" height="18" alt=""></a>
-        <button class="nav__theme" type="button" aria-label="Theme switch (coming soon)" disabled><img src="assets/theme-sun.svg" width="20" height="20" alt=""></button>
+        <button hidden class="nav__theme" type="button" aria-label="Theme switch (coming soon)" disabled><img src="assets/theme-sun.svg" width="20" height="20" alt=""></button>
       </nav>
     </div>
   </header>
