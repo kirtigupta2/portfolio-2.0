@@ -194,7 +194,7 @@
           });
         }, wait);
       }
-      const start = () => { swap(a, 'Product', '-28.73%', DELAY); swap(b, 'Designer', null, DELAY + 120); };
+      const start = () => { swap(a, 'Product', null, DELAY); swap(b, 'Designer', null, DELAY + 120); };
       document.readyState === 'complete' ? start() : addEventListener('load', start, { once: true });
     })();
 
