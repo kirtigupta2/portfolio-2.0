@@ -31,11 +31,12 @@
   </header>
   <div class="column">
     <section class="hero" id="home">
-      <h1 class="hero__heading" id="hero-heading" aria-live="polite">
-        <span class="hero__title hero__title--a" id="hero-word-a">Welcome to</span>
-        <span class="hero__title hero__title--b" id="hero-word-b">Kirti’s portfolio</span>
-      </h1>
+      <!-- The two words live inside the figure, so they keep the same position next to the portrait at every screen size -->
       <div class="hero__figure">
+        <h1 class="hero__heading" id="hero-heading" aria-live="polite">
+          <span class="hero__title hero__title--a" id="hero-word-a">Welcome to</span>
+          <span class="hero__title hero__title--b" id="hero-word-b">Kirti’s portfolio</span>
+        </h1>
         <div class="hero__ellipse" id="hero-ellipse" aria-hidden="true"></div>
         <img class="hero__photo" src="assets/image5.png" alt="Portrait of Kirti holding a coffee cup">
       </div>
@@ -193,7 +194,7 @@
           });
         }, wait);
       }
-      const start = () => { swap(a, 'Product', '291.17px', DELAY); swap(b, 'Designer', null, DELAY + 120); };
+      const start = () => { swap(a, 'Product', '-28.73%', DELAY); swap(b, 'Designer', null, DELAY + 120); };
       document.readyState === 'complete' ? start() : addEventListener('load', start, { once: true });
     })();
 
