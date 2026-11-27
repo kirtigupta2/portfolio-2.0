@@ -135,7 +135,7 @@ h2 { font-family: Roboto, system-ui, sans-serif; font-weight: 700; }
 .hand-group { position: absolute; left: 196px; top: 365px; display: flex; align-items: center; gap: 8.389px; white-space: nowrap; }
 .hand-group .hand-text { font-family: 'Short Stack', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 16.778px; line-height: 24.118px; color: var(--note); }
 .hand-group img { width: 17.827px; height: 17.827px; flex-shrink: 0; object-fit: cover; }
-.hand--right { left: 668.58px; top: 441.55px; width: 449.86px; font-size: 20.973px; line-height: 29.362px; }
+.hand--right { left: 668.58px; top: 441.55px; width: 580px; font-size: 20.973px; line-height: 29.362px; }
 
 /* Projects */
 .projects { border-top: 1px dashed var(--border); padding: 16px 0 24px; display: flex; flex-direction: column; gap: 16px; }
@@ -236,7 +236,7 @@ h2 { font-family: Roboto, system-ui, sans-serif; font-weight: 700; }
   .hand, .hand-group { position: static; transform: none; width: auto; text-align: center; white-space: normal; }
   .hand--left { margin-top: 26px; }
   .hand-group { justify-content: center; }
-  .hand--right { position: relative; left: auto; top: auto; text-align: left; font-size: 19px; line-height: 27px; max-width: 460px; padding: 0 6px; margin-top: 14px; }
+  .hand--right { position: relative; left: auto; top: auto; text-align: left; font-size: 19px; line-height: 27px; max-width: 540px; padding: 0 6px; margin-top: 14px; }
 }
 @media (max-width: 800px) {
   .column { padding-bottom: 90px; }
