@@ -276,3 +276,18 @@ h2 { font-family: Roboto, system-ui, sans-serif; font-weight: 700; }
 /* Thank-you note at the bottom of the home page */
 .thanks { border-top: 1px dashed var(--border); padding: 48px 20px 64px; text-align: center; }
 .thanks p { margin: 0; font-family: Roboto, system-ui, sans-serif; font-size: 20.973px; line-height: 29.362px; color: var(--note); }
+
+/* ===== Page-by-page scrolling: each section settles in the view, and the notebook fits the screen ===== */
+html { scroll-snap-type: y proximity; }   /* "proximity" = snaps when you stop near a section, never traps you in a tall one */
+.hero, #work .projects__header--work, #about { scroll-snap-align: start; scroll-margin-top: 80px; }
+.projects__grid .card:nth-child(3) { scroll-snap-align: start; scroll-margin-top: 96px; }   /* second row of projects */
+.thanks { scroll-snap-align: end; }
+/* the process section is one screen: the notebook shrinks (keeping its shape) so heading + notebook fit under the nav */
+#about { min-height: calc(100svh - 80px); box-sizing: border-box; }
+#about .about-board__card img { width: auto; max-width: 100%; max-height: max(420px, calc(100svh - 80px - 140px)); }
+@media (max-width: 1180px) {
+  .projects__grid .card { scroll-snap-align: start; scroll-margin-top: 96px; }   /* one project per screen on tablets and phones */
+  #about { min-height: 0; }
+  #about .about-board__card img { width: 100%; max-height: none; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-snap-type: none; } }
