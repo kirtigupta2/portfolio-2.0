@@ -127,13 +127,13 @@ h2 { font-family: Roboto, system-ui, sans-serif; font-weight: 700; }
 .hero__arrow--b .hero__arrow-inner { width: 73.2px; height: 44.1px; transform: translate(-50%, -50%) rotate(-121.93deg) skewX(-7.64deg); }
 .hero__arrow--b img { left: -0.72%; top: -1.78%; width: 101.44%; height: 102.97%; }
 .hand {
-  position: absolute; font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive;
+  position: absolute; font-family: 'Short Stack', 'Segoe Print', 'Comic Sans MS', cursive;
   font-size: 16.778px; line-height: 24.118px; color: var(--note);
 }
 .hand--left { left: 383px; top: 339.84px; white-space: nowrap; transform: translateX(-100%); text-align: right; }
 /* second line of the note + Accenture logo (Figma: its own group, 8.389px gap) */
 .hand-group { position: absolute; left: 196px; top: 365px; display: flex; align-items: center; gap: 8.389px; white-space: nowrap; }
-.hand-group .hand-text { font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 16.778px; line-height: 24.118px; color: var(--note); }
+.hand-group .hand-text { font-family: 'Short Stack', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 16.778px; line-height: 24.118px; color: var(--note); }
 .hand-group img { width: 17.827px; height: 17.827px; flex-shrink: 0; object-fit: cover; }
 .hand--right { left: 668.58px; top: 441.55px; width: 449.86px; font-size: 20.973px; line-height: 29.362px; }
 
