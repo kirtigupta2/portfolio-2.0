@@ -36,7 +36,7 @@ html { background: var(--bg); }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: Inter, system-ui, sans-serif;
+  font-family: Roboto, system-ui, sans-serif;   /* Roboto everywhere except the hero (see .hero) */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,7 +44,9 @@ body {
 html { scroll-behavior: smooth; }
 section[id] { scroll-margin-top: 80px; }
 a { color: inherit; text-decoration: none; }
-h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
+h1 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
+h2 { font-family: Roboto, system-ui, sans-serif; font-weight: 700; }
+.hero { font-family: Inter, system-ui, sans-serif; }   /* the hero keeps its original fonts */
 .hero__heading { position: static; }   /* one <h1>; its two words are positioned against the hero */
 
 .column {
@@ -175,7 +177,7 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 @media (prefers-reduced-motion: reduce) { .card__tab-inner, .card__tab-inner span { transition: none !important; } }
 .card__titles { display: flex; flex-direction: column; gap: 4px; width: 100%; }
 .card__namerow { display: flex; justify-content: space-between; align-items: center; }
-.card__name { font-family: Impact, 'Anton', sans-serif; font-weight: 400; font-size: 20px; color: var(--card-name); }
+.card__name { font-family: Roboto, system-ui, sans-serif; font-weight: 700; font-size: 20px; color: var(--card-name); }
 .card__tagline { font-size: 16px; font-weight: 500; color: #b6b6b6; }
 .card__live { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; line-height: normal; color: var(--muted); }
 .card__desc { font-size: 16px; font-weight: 500; line-height: 20px; color: var(--body); }
@@ -273,4 +275,4 @@ h1, h2 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 
 /* Thank-you note at the bottom of the home page */
 .thanks { border-top: 1px dashed var(--border); padding: 48px 20px 64px; text-align: center; }
-.thanks p { margin: 0; font-family: 'Figma Hand', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 20.973px; line-height: 29.362px; color: var(--note); }
+.thanks p { margin: 0; font-family: Roboto, system-ui, sans-serif; font-size: 20.973px; line-height: 29.362px; color: var(--note); }
