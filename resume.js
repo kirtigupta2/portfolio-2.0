@@ -1,6 +1,6 @@
 // Resume viewer: the nav "Resume" link opens the PDF in an on-page overlay with a Download button.
 (function () {
-  const PDF = 'assets/Kirti_Gupta_Resume.pdf';
+  const PDF = 'assets/Kirti_Gupta_Resume.pdf?v=2';   // bump v when the PDF is replaced so browsers don't show the old copy
   const links = document.querySelectorAll('a[data-resume]');
   if (!links.length) return;
 
