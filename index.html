@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Short+Stack&display=swap">
-  <link rel="stylesheet" href="styles.css?v=20261128c">
+  <link rel="stylesheet" href="styles.css?v=20261128d">
   <script>
     // Apply the saved theme before the page paints (no flash). Default is the dark theme.
     // Theme switching is switched OFF for now (THEME_SWITCH = false): the site always uses the dark theme.
@@ -59,7 +59,20 @@
     <section class="projects" id="about">
       <div class="projects__header"><h2>About my process</h2></div>
       <div class="about-board">
-        <div class="about-board__card"><img src="assets/about-process-8.webp" width="1166" height="700" alt="Open notebook page titled How I work things out: I break the problem down by asking what is happening in the domain and where the flow is breaking down, I sketch a few ways through, and I bring ideas to life in Figma, work through every interaction and use AI to turn designs into working prototypes that I test with users, learn from and improve. The right page has photos of me presenting and the note: this is my carefully crafted process, presented time and again, classic yet remarkably effective. A pencil and a plastic sleeve that says 3 things I strongly believe in rest on the notebook."></div>
+        <div class="about-board__card">
+          <div class="about-scene" id="about-scene">
+            <img class="about-scene__book" src="assets/about/notebook.webp" width="1981" height="1307" alt="Open notebook page titled How I work things out: I break the problem down by asking what is happening in the domain and where the flow is breaking down, I sketch a few ways through, and I bring ideas to life in Figma, work through every interaction and use AI to turn designs into working prototypes that I test with users, learn from and improve. The right page has photos of me presenting and the note: this is my carefully crafted process, presented time and again, classic yet remarkably effective.">
+            <!-- Plastic sleeve: hover lifts it over the notebook, click lets the three notes slide out; click anywhere else and they go back in -->
+            <div class="pouch" id="pouch" role="button" tabindex="0" aria-expanded="false" aria-controls="pouch-notes" aria-label="3 things I strongly believe in. Open the sleeve to read them.">
+              <img class="pouch__sheet" src="assets/about/pouch.webp" width="1100" height="1173" alt="">
+              <div class="pouch__notes" id="pouch-notes">
+                <img class="pouch__note" src="assets/about/note-1.webp" width="1300" height="423" alt="Pursue the right flow relentlessly.">
+                <img class="pouch__note" src="assets/about/note-2.webp" width="1300" height="463" alt="Solve the right problem.">
+                <img class="pouch__note" src="assets/about/note-3.webp" width="1300" height="362" alt="Design for humans, put people at the heart of every decision.">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -301,6 +314,7 @@
     });
     fitTabs();
   </script>
-  <script src="resume.js?v=20261128c"></script>
+  <script src="resume.js?v=20261128d"></script>
+  <script src="about-scene.js?v=20261128d"></script>
 </body>
 </html>
