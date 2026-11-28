@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Short+Stack&display=swap">
-  <link rel="stylesheet" href="styles.css?v=20261128g">
+  <link rel="stylesheet" href="styles.css?v=20261128i">
   <script>
     // Apply the saved theme before the page paints (no flash). Default is the dark theme.
     // Theme switching is switched OFF for now (THEME_SWITCH = false): the site always uses the dark theme.
@@ -246,6 +246,18 @@
     // back at the very top the circle simply sits on Home again
     function hideCircle() { if (circleAnim) circleAnim.cancel(); placeCircle(tabs[0]); }
     tabs.forEach(t => t.addEventListener('click', () => { lastClick = performance.now(); setActive(t.getAttribute('href')); drawCircle(t); }));
+    // Resume opens an overlay (resume.js) instead of going to a section: the pen circles it while the overlay is open, then the circle goes back
+    let circleBeforeResume = null, resumeLinkEl = null;
+    document.addEventListener('resume:open', e => {
+      const link = e.detail && e.detail.link; if (!link) return;
+      if (circleItem !== link) circleBeforeResume = circleItem;
+      resumeLinkEl = link; lastClick = performance.now(); drawCircle(link);
+    });
+    document.addEventListener('resume:close', () => {
+      // only move the circle back if it is still on Resume (clicking another nav item has already moved it)
+      if (circleItem === resumeLinkEl && circleBeforeResume) { lastClick = performance.now(); placeCircle(circleBeforeResume); }
+      circleBeforeResume = null;
+    });
     addEventListener('scroll', () => { if (scrollY < 10 && performance.now() - lastClick > 1500) { setActive('#home'); hideCircle(); } }, { passive: true });   // (the first frames of a smooth scroll still read scrollY≈0, so ignore them right after a click)
     setActive(tabs.some(t => t.getAttribute('href') === location.hash) ? location.hash : '#home');
     // By default the circle sits on the active item (Home)
@@ -316,7 +328,7 @@
     });
     fitTabs();
   </script>
-  <script src="resume.js?v=20261128g"></script>
-  <script src="about-scene.js?v=20261128g"></script>
+  <script src="resume.js?v=20261128i"></script>
+  <script src="about-scene.js?v=20261128i"></script>
 </body>
 </html>

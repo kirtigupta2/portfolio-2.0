@@ -273,9 +273,9 @@ html[data-theme="light"] .hero__ellipse { top: 71.2%; }
 @media (hover: none) { .card__tab { display: none; } }
 
 /* Resume viewer overlay (resume.js) */
-.resume-modal { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(0, 0, 0, .75); }
+.resume-modal { position: fixed; inset: 74px 0 0 0; z-index: 9; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(0, 0, 0, .75); }
 .resume-modal[hidden] { display: none; }
-.resume-modal__panel { display: flex; flex-direction: column; width: min(960px, 100%); height: min(92vh, 1100px); background: var(--bg); border: 1px dashed var(--border); border-radius: 12px; overflow: hidden; }
+.resume-modal__panel { display: flex; flex-direction: column; width: min(960px, 100%); height: min(calc(100vh - 74px - 32px), 1100px); background: var(--bg); border: 1px dashed var(--border); border-radius: 12px; overflow: hidden; }
 .resume-modal__bar { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px dashed var(--border); }
 .resume-modal__title { flex: 1; font-size: 20px; font-weight: 600; color: var(--text); }
 .resume-modal__btn { font: inherit; font-size: 16px; font-weight: 500; color: var(--text); background: none; border: 1px solid var(--border); border-radius: 999px; padding: 6px 16px; cursor: pointer; text-decoration: none; }
@@ -283,7 +283,7 @@ html[data-theme="light"] .hero__ellipse { top: 71.2%; }
 .resume-modal__frame { flex: 1; width: 100%; border: 0; background: #fff; }
 .resume-modal__fallback { margin: 0; padding: 8px 16px; font-size: 14px; color: var(--muted); border-top: 1px dashed var(--border); }
 .resume-modal__fallback a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
-@media (max-width: 600px) { .resume-modal { padding: 8px; } .resume-modal__panel { height: 96vh; } }
+@media (max-width: 600px) { .resume-modal { padding: 8px; } .resume-modal__panel { height: calc(100vh - 74px - 16px); } }
 
 /* Thank-you note at the bottom of the home page */
 .thanks { border-top: 1px dashed var(--border); padding: 48px 20px 64px; text-align: center; }

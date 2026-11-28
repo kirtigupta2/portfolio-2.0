@@ -29,11 +29,13 @@
     opener = from;
     if (!frame.getAttribute('src')) frame.src = PDF + '#view=FitH';
     modal.hidden = false;
+    document.dispatchEvent(new CustomEvent('resume:open', { detail: { link: from } }));   // lets the nav draw its circle around Resume
     document.documentElement.style.overflow = 'hidden';
     modal.querySelector('.resume-modal__close').focus();
   }
   function close() {
     modal.hidden = true;
+    document.dispatchEvent(new CustomEvent('resume:close'));
     document.documentElement.style.overflow = '';
     if (opener) opener.focus();
   }
@@ -43,6 +45,8 @@
     e.preventDefault(); open(a);
   }));
   modal.querySelector('.resume-modal__close').addEventListener('click', close);
+  // the nav stays visible above the overlay: clicking any other nav item closes it
+  document.querySelectorAll('.nav a:not([data-resume]), .nav button').forEach(el => el.addEventListener('click', () => { if (!modal.hidden) close(); }));
   modal.addEventListener('click', e => { if (e.target === modal) close(); });
   addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
 })();
