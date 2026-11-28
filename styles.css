@@ -161,6 +161,7 @@ html[data-theme="light"] .hero__ellipse { top: 71.2%; }
 /* The notebook scene is laid out in a 1166 x 700 box (the Figma size); everything inside is a percentage of it, so it scales as one piece */
 .about-scene { position: relative; width: 1166px; max-width: 100%; aspect-ratio: 1166 / 700; }
 .about-scene__book { position: absolute; left: 13.7%; top: 3.1%; width: 79.8%; height: auto; display: block; z-index: 2; }
+.about-scene__pencil { position: absolute; left: 71.1%; top: 1.4%; width: 27.7%; height: auto; z-index: 3; pointer-events: none; filter: drop-shadow(0 4px 5px rgba(0,0,0,.45)); }   /* lies across the top-right corner of the notebook, as in the design */
 .pouch { position: absolute; left: .7%; top: 43.7%; width: 31.3%; z-index: 1; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent;
   transition: left .6s cubic-bezier(.2,.8,.2,1), top .6s cubic-bezier(.2,.8,.2,1), width .6s cubic-bezier(.2,.8,.2,1), transform .35s cubic-bezier(.2,.8,.2,1), filter .35s; }
 .pouch__sheet { display: block; width: 100%; height: auto; pointer-events: none; -webkit-user-drag: none; filter: drop-shadow(0 6px 10px rgba(0,0,0,.45)); }
