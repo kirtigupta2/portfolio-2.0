@@ -167,7 +167,7 @@ html[data-theme="light"] .hero__ellipse { top: 71.2%; }
 .pouch__sheet { display: block; width: 100%; height: auto; pointer-events: none; -webkit-user-drag: none; filter: drop-shadow(0 6px 10px rgba(0,0,0,.45)); }
 .pouch:hover, .pouch:focus-visible { z-index: 5; transform: translate(5%, -4%); }                 /* hover: it slides out over the notebook */
 .pouch:focus-visible .pouch__sheet { outline: 2px solid #fff; outline-offset: 4px; }
-.pouch.is-open { left: 27.6%; top: 7%; width: 44.8%; z-index: 6; cursor: default; transform: none; }  /* click: it comes to the middle, the notes spread out on it */
+.pouch.is-open { left: 27.6%; top: 7%; width: 44.8%; z-index: 6; cursor: pointer; transform: none; }  /* click: it comes to the middle, the notes spread out on it */
 .pouch__notes { position: absolute; inset: 0; pointer-events: none; }
 .pouch__note { position: absolute; width: var(--w, 78%); left: var(--x, 12%); top: var(--y, 40%); height: auto; z-index: 2; opacity: 0; filter: drop-shadow(0 6px 8px rgba(0,0,0,.4));
   transform: translateY(18%) rotate(var(--r0, -20deg)) scale(.55); transform-origin: 50% 50%; -webkit-user-drag: none;

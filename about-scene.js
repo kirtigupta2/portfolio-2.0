@@ -1,5 +1,5 @@
 // About my process: the plastic sleeve. Hover lifts it over the notebook, click opens it and the three notes
-// spread out on it in a new random arrangement each time; clicking anywhere else (or Esc) puts them back.
+// spread out on it in a new random arrangement each time; clicking the sleeve again, anywhere else, or pressing Esc puts them back.
 (function () {
   const pouch = document.getElementById('pouch');
   if (!pouch) return;
@@ -41,8 +41,8 @@
     pouch.setAttribute('aria-label', '3 things I strongly believe in. Open the sleeve to read them.');
   }
 
-  pouch.addEventListener('click', e => { e.stopPropagation(); open(); });
-  pouch.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && !pouch.classList.contains('is-open')) { e.preventDefault(); open(); } });
+  pouch.addEventListener('click', e => { e.stopPropagation(); pouch.classList.contains('is-open') ? close() : open(); });   // click the sleeve: opens it, click it again: closes it
+  pouch.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pouch.classList.contains('is-open') ? close() : open(); } });
   document.addEventListener('click', e => { if (!pouch.contains(e.target)) close(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 })();
