@@ -42,7 +42,7 @@ body {
   align-items: center;
 }
 html { scroll-behavior: smooth; }
-section[id] { scroll-margin-top: 80px; }
+section[id] { scroll-margin-top: 74px; }
 a { color: inherit; text-decoration: none; }
 h1 { font-family: Impact, 'Anton', sans-serif; font-weight: 400; }
 h2 { font-family: Roboto, system-ui, sans-serif; font-weight: 700; }
@@ -65,7 +65,7 @@ h2 { font-family: Roboto, system-ui, sans-serif; font-weight: 700; }
   border-bottom: 1px dashed var(--border);
 }
 .nav__inner {
-  width: var(--col); max-width: 100%; height: 79px; margin: 0 auto;
+  width: var(--col); max-width: 100%; height: 73px; margin: 0 auto;
   display: flex; align-items: center; justify-content: center;
   border-left: 1px dashed var(--border); border-right: 1px dashed var(--border);
 }
@@ -104,7 +104,7 @@ h2 { font-family: Roboto, system-ui, sans-serif; font-weight: 700; }
 /* Hero: 571px tall, coordinates from Figma column */
 /* First fold: the hero fills the window below the nav, so nothing of "Featured Projects" shows until you scroll.
    (623px = the 571px of hero art + the 52px gap Figma leaves before the next section.) */
-.hero { position: relative; min-height: max(623px, calc(100vh - 80px)); min-height: max(623px, calc(100svh - 80px)); overflow: hidden; }
+.hero { position: relative; min-height: max(623px, calc(100vh - 74px)); min-height: max(623px, calc(100svh - 74px)); overflow: hidden; }
 @property --g { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 /* The red ring: its gradient is a conic gradient that JS spins one full turn while the text is highlighted */
 .hero__ellipse { position: absolute; left: 21.9%; top: 73.6%; width: 55.7%; aspect-ratio: 201 / 134; transform: rotate(-29.3deg); transition: top .5s ease;
@@ -193,7 +193,7 @@ html[data-theme="light"] .hero__ellipse { top: 71.2%; }
 
 @media (max-width: 800px) {
   .projects__grid { grid-template-columns: 1fr; }
-  .hero { min-height: max(700px, calc(100svh - 80px)); }
+  .hero { min-height: max(700px, calc(100svh - 74px)); }
 }
 
 /* Figma spacing: gap above "About my process" and trailing space below it */
@@ -227,7 +227,7 @@ html[data-theme="light"] .hero__ellipse { top: 71.2%; }
   .nav__item img { width: 14px; height: 14px; }
 
   /* Hero stacks: words, photo, notes. (Desktop uses fixed coordinates from the Figma frame.) */
-  .hero { min-height: calc(100svh - 80px); display: flex; flex-direction: column; align-items: center; justify-content: center;
+  .hero { min-height: calc(100svh - 74px); display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 28px 16px 36px; gap: 8px; }
   .hero__figure { position: relative; left: auto; top: auto; flex: none; margin: 0 auto; transform: translateX(calc(var(--fw) * -0.167)); }   /* words stay glued to the portrait; the whole headline+portrait group is centred */
   .hero__arrow { display: none; }
@@ -277,14 +277,14 @@ html[data-theme="light"] .hero__ellipse { top: 71.2%; }
 
 /* ===== Page-by-page scrolling: each section settles in the view, and the notebook fits the screen ===== */
 html { scroll-snap-type: y proximity; }   /* "proximity" = snaps when you stop near a section, never traps you in a tall one */
-.hero, #work .projects__header--work, #about { scroll-snap-align: start; scroll-margin-top: 80px; }
-.projects__grid .card:nth-child(3) { scroll-snap-align: start; scroll-margin-top: 96px; }   /* second row of projects */
+.hero, #work .projects__header--work, #about { scroll-snap-align: start; scroll-margin-top: 74px; }
+.projects__grid .card:nth-child(3) { scroll-snap-align: start; scroll-margin-top: 90px; }   /* second row of projects */
 .thanks { scroll-snap-align: end; }
 /* the process section fills one screen; the notebook keeps its original size */
-#about { min-height: calc(100svh - 80px); box-sizing: border-box; }
+#about { min-height: calc(100svh - 74px); box-sizing: border-box; }
 #about .about-board__card img { width: 1091px; max-width: 100%; max-height: none; }   /* original size */
 @media (max-width: 1180px) {
-  .projects__grid .card { scroll-snap-align: start; scroll-margin-top: 96px; }   /* one project per screen on tablets and phones */
+  .projects__grid .card { scroll-snap-align: start; scroll-margin-top: 90px; }   /* one project per screen on tablets and phones */
   #about { min-height: 0; }
   #about .about-board__card img { width: 100%; max-height: none; }
 }

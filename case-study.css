@@ -2,7 +2,7 @@
 .cs { width: var(--col); max-width: 100%; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 0 56px; padding: 56px 20px 96px; border-left: 1px dashed var(--border); border-right: 1px dashed var(--border); position: relative; }
 
 /* Index */
-.cs-toc { position: sticky; top: 112px; align-self: start; padding-top: 6px; }
+.cs-toc { position: sticky; top: 106px; align-self: start; padding-top: 6px; }
 .cs-toc__label { margin: 0 0 14px; font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .cs-toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px dashed var(--border); }
 .cs-toc a { display: block; margin-left: -1px; padding: 8px 0 8px 16px; border-left: 2px solid transparent; font-size: 17px; line-height: 24px; color: var(--nav); transition: color .2s, border-color .2s; }
@@ -32,7 +32,7 @@
 .cs-links a:hover { border-color: var(--nav-hover); }
 
 /* Sections: the case-study images, each group is one index entry */
-.cs-group { scroll-margin-top: 104px; display: grid; gap: 20px; padding-top: 28px; margin-top: 28px; border-top: 1px dashed var(--border); }
+.cs-group { scroll-margin-top: 98px; display: grid; gap: 20px; padding-top: 28px; margin-top: 28px; border-top: 1px dashed var(--border); }
 #overview { margin-top: 0; }
 .cs-group::before { content: attr(data-title); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .cs-group img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); background: var(--tag-bg); }
@@ -46,8 +46,8 @@
   .cs-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cs-sub { font-size: 18px; line-height: 27px; }
   .cs-crumb { margin-left: 58px; min-height: 46px; display: flex; align-items: center; margin-top: -12px; }
-  .cs-toc-btn { display: flex; align-items: center; justify-content: center; position: fixed; left: 14px; top: 92px; z-index: 20; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--border); background: var(--tag-bg); color: var(--text); cursor: pointer; box-shadow: 0 4px 18px rgba(0,0,0,.45); }
-  .cs-toc { position: fixed; left: 14px; top: 146px; z-index: 20; width: min(280px, calc(100vw - 28px)); padding: 16px 16px 8px; background: var(--bg); border: 1px dashed var(--border); border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,.6); display: none; max-height: calc(100vh - 170px); overflow: auto; }
+  .cs-toc-btn { display: flex; align-items: center; justify-content: center; position: fixed; left: 14px; top: 86px; z-index: 20; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--border); background: var(--tag-bg); color: var(--text); cursor: pointer; box-shadow: 0 4px 18px rgba(0,0,0,.45); }
+  .cs-toc { position: fixed; left: 14px; top: 140px; z-index: 20; width: min(280px, calc(100vw - 28px)); padding: 16px 16px 8px; background: var(--bg); border: 1px dashed var(--border); border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,.6); display: none; max-height: calc(100vh - 170px); overflow: auto; }
   .cs-toc.is-open { display: block; }
 }
 @media (max-width: 560px) {
